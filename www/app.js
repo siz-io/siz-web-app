@@ -1,4 +1,25 @@
 var API_ENDPOINT = "http://localhost:9000";
+var BROWSER = detect_browser();
+
+function detect_browser(){
+	if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0)
+	{
+		if( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false )
+		{
+			return "safari_ios";
+		}
+		return "safari";
+	}
+	if(typeof InstallTrigger !== 'undefined')
+		return "firefox";
+	if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
+		return "opera";
+	if(!!window.chrome)
+		return "chrome";
+	if(/*@cc_on!@*/false || !!document.documentMode)
+		return "ie";	
+	return "unknown"
+}
 
 function retrieve_token()
 {
@@ -35,18 +56,57 @@ function retrieve_story(token,slug)
 	request.send();
 }
 
-function box_to_html(box, id)
+function box_to_html(box)
 {
-	var ret = "<video width='"+box.width+"'' height='"+box.height+"' class='story_box' loop preload autoplay contextmenu='return false;'>";
+	//if(['chrome'].indexOf(BROWSER) > -1)
+		return box_to_html_video(box);
+	return box_to_html_img(box);
+}
+
+function box_to_html_video(box)
+{
+	var ret = "<video width='"+box.width+"' height='"+box.height+"' class='story_box' loop preload autoplay controls>";
 	box.formats.forEach(function(format) {
 		if(['mp4'].indexOf(format.type) > -1)
 		{
-			ret += "<source src='"+format.href+"' type='video/"+format.type+"'>";
+			ret += "<source src='"+format.href+"' type='video/"+format.type+"'></source>";
+		}
+		else if('gif' === format.type)
+		{
+			ret += "<image src='"+format.href+"' />";
 		}
 	});
- 	ret += "Your browser does not support our story :(";
 	ret += "</video>";
 	return ret;
+}
+
+function box_to_html_img(box)
+{
+	var ret = "";
+	box.formats.forEach(function(format) {
+		if('gif' === format.type)
+		{
+			ret += "<image src='"+format.href+"' />";
+		}
+	});
+	return ret;
+}
+
+function video_fallback(video) {
+    var div = document.createElement('div');
+    div.innerHTML = video.innerHTML;
+    video.parentNode.replaceChild(div, video);
+}
+
+function add_video_fallback()
+{
+	var videos = document.querySelectorAll('video');
+	for (var i=0; i<videos.length; i++){
+		var video = videos[i],
+		    sources = video.querySelectorAll('source'),
+		        lastsource = sources[sources.length-1];
+		lastsource.addEventListener('error', video_fallback(video), false);
+	}
 }
 
 function story_to_html(story)
@@ -59,11 +119,21 @@ function story_to_html(story)
 	return ret;
 }
 
+function play_all_video()
+{
+	var videos = document.getElementsByTagName("video")
+	for (var i=0; i<videos.length; i++){
+	  videos[i].play();
+	}
+}
+
 function show_story(story)
 {	
 	document.title = "SIZ - "+story.title;
 	document.getElementById("story_title").innerHTML = story.title;
 	document.getElementById("story_boxes").innerHTML = story_to_html(story);
+	add_video_fallback();
+	play_all_video();
 }
 
 retrieve_token()
