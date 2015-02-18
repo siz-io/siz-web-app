@@ -2,6 +2,8 @@ var API_ENDPOINT = "http://localhost:9000";
 var BROWSER = detect_browser();
 var STORY = "4-year-old-s-dream-of-being-ups-driver-comes-true";
 
+
+
 function detect_browser(){
 	if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0)
 	{
@@ -152,12 +154,27 @@ function play_all_video()
 	}
 }
 
+function youtube_to_dom(source)
+{
+	var iframe = document.createElement("iframe");
+	iframe.width="520";
+	iframe.height="315";
+	iframe.src="https://www.youtube.com/embed/"+source.id;
+	iframe.frameborder="0";
+	iframe.allowfullscreen=true;
+	return iframe;
+}
+
 function show_story(story)
 {	
 	document.title = "SIZ - "+story.title;
 	document.getElementById("story_title").innerHTML = story.title;
 	var storyNode = document.getElementById("story_boxes");
 	storyNode.parentNode.replaceChild(story_to_dom(story),storyNode);
+	if(story.source.type === "youtube")
+	{
+		document.getElementById("story_video").appendChild(youtube_to_dom(story.source));
+	}
 	//add_video_fallback();
 	play_all_video();
 }
