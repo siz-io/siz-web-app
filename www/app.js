@@ -1,5 +1,6 @@
 var API_ENDPOINT = "http://localhost:9000";
 var BROWSER = detect_browser();
+var STORY = "4-year-old-s-dream-of-being-ups-driver-comes-true";
 
 function detect_browser(){
 	if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0)
@@ -29,7 +30,7 @@ function retrieve_token()
 	request.onload = function() {
 	    if (request.status === 201) {
 	        var token = JSON.parse(request.responseText).tokens;
-	        retrieve_story(token,"4-year-old-s-dream-of-being-ups-driver-comes-true")
+	        retrieve_story(token,STORY)
 	    }
 	    else {
 	    	alert("Unexpected answer")
