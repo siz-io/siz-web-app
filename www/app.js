@@ -77,6 +77,7 @@ function box_to_dom_video(box)
 	var video = document.createElement('video');
 	video.width = box.width;
 	video.height = box.height;
+	video.class = "box";
 	video.loop = true;
 	video.controls = false;
 	video.autoplay = true;
@@ -108,6 +109,7 @@ function box_to_dom_video(box)
 function box_to_dom_img(box)
 {
 	var image = document.createElement('img');
+	image.class = "box";
 	box.formats.forEach(function(format) {
 		if('gif' === format.type)
 		{
