@@ -45,8 +45,11 @@ function retrieveToken()
 	        retrieveStory(token,STORY_SLUG)
 	    }
 	    else {
-	    	alert('Unexpected answer')
+	    	showErrorStory();
 	    }
+	};
+	request.onerror = function() {
+	    showErrorStory();
 	};
 	request.send('{}');
 }
@@ -63,8 +66,11 @@ function retrieveStory(token,slug)
 	        showStory(story);
 	    }
 	    else {
-	    	alert('Unexpected answer')
+	    	showErrorStory();
 	    }
+	};
+	request.onerror = function() {
+	    showErrorStory();
 	};
 	request.send();
 }
@@ -173,6 +179,11 @@ function youtubeToDom(source)
 	iframe.frameborder='0';
 	iframe.allowfullscreen=true;
 	return iframe;
+}
+
+function showErrorStory()
+{
+	document.getElementById('story_boxes').innerHTML = "Impossible to load your story. Try with the app.";
 }
 
 function showStory(story)
