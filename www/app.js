@@ -198,6 +198,16 @@ function showStory(story)
 	}
 	//addVideoFallback();
 	playAllVideo();
+	showShare();
+}
+
+function showShare()
+{
+    var encodedURL = encodeURIComponent(document.URL);
+    document.getElementById('share_facebook').href='https://www.facebook.com/sharer/sharer.php?u='+encodedURL;
+	document.getElementById('share_twitter').href ='https://twitter.com/intent/tweet?url='+encodedURL+'&original_referer='+encodedURL;
+	document.getElementById('share_mail').href='mailto:?body='+encodedURL;
+	document.getElementById('share_box').style.visibility='visible';
 }
 
 retrieveToken()

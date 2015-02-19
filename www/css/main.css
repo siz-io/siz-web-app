@@ -75,12 +75,13 @@ top: 300px;
 .storepic{
     margin-bottom:30px;
 }
-#sharebox{
+.share_box{
     background-color: rgb(234,234,234); 
     padding:15px;
     width:200px;
     margin:auto;
     height:86px;
+    visibility:hidden;
 }
 .sharebutton{
     float:left;
