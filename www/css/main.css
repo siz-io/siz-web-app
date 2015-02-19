@@ -50,10 +50,15 @@ h1{
     width:520px;
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1120px) {
+    .story_container{
+        position: relative;
+        width:1070px;
+        margin: auto;
+    }
     .rightpart{
         position: absolute;
-        right: 20px;
+        right: 0px;
         top: 300px;
     }
     .appstore_pic{
