@@ -1,7 +1,17 @@
-var API_ENDPOINT = 'http://localhost:9000';
+var API_ENDPOINT = 'https://api.siz.io';
 var BROWSER = detectBrowser();
-var STORY = '4-year-old-s-dream-of-being-ups-driver-comes-true';
+var STORY_SLUG = retrieveStorySlugFromUrl();
 
+function retrieveStorySlugFromUrl(){
+	var storySlugRegex = /^\/stories\/([a-z1-9A-Z-]{1,100})$/g;
+
+	var matches = storySlugRegex.exec(window.location.pathname);
+	if(matches != null)
+		return matches[1];
+	if(/^#[a-z1-9A-Z-]{2,100}$/.exec(window.location.hash) != null)
+		return window.location.hash.substr(1);
+	return '404';
+}
 
 function detectBrowser()
 {
@@ -32,7 +42,7 @@ function retrieveToken()
 	request.onload = function() {
 	    if (request.status === 201) {
 	        var token = JSON.parse(request.responseText).tokens;
-	        retrieveStory(token,STORY)
+	        retrieveStory(token,STORY_SLUG)
 	    }
 	    else {
 	    	alert('Unexpected answer')
