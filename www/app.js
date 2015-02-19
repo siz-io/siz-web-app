@@ -1,6 +1,7 @@
 var API_ENDPOINT = 'https://api.siz.io';
 var BROWSER = detectBrowser();
 var STORY_SLUG = retrieveStorySlugFromUrl();
+var BOX_WIDTH = 520;
 
 function retrieveStorySlugFromUrl(){
 	var storySlugInUrlRegex = /^\/stories\/([a-z1-9A-Z-]{1,100})$/g;
@@ -91,11 +92,18 @@ function videoFallback(video) {
     video.parentNode.replaceChild(div, video);
 }
 
+
+
+function heightRatio(width,height)
+{
+	return Math.round(BOX_WIDTH*height/width);
+}
+
 function boxToDomVideo(box)
 {
 	var video = document.createElement('video');
-	video.width = box.width;
-	video.height = box.height;
+	video.width = BOX_WIDTH;
+	video.height = heightRatio(box.width,box.height);
 	video.class = 'box';
 	video.loop = true;
 	video.controls = false;
@@ -117,8 +125,8 @@ function boxToDomVideo(box)
 		{
 			var image = document.createElement('img');
 			image.src = format.href;
-			image.width = box.width;
-			image.height = box.height;
+			image.width = BOX_WIDTH;
+			image.height = heightRatio(box.width,box.height);;
 			video.appendChild(image);
 		}
 	}
@@ -133,8 +141,8 @@ function boxToDomImg(box)
 		if('gif' === format.type)
 		{
 			image.src = format.href;
-			image.width = box.width;
-			image.height = box.height;
+			image.width = BOX_WIDTH;
+			image.height = heightRatio(box.width,box.height);;
 		}
 	});
 	return image;
@@ -157,8 +165,6 @@ function storyToDom(story)
 	var ret = document.createElement('div');
 	story.boxes.forEach(function(box) {
 		ret.appendChild(boxToDom(box));
-		ret.appendChild(document.createElement('br'));
-		ret.appendChild(document.createElement('br'));		
 	});
 	return ret;
 }
