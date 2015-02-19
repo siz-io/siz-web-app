@@ -2,14 +2,13 @@ body{
     margin: auto;
 }
 
-#header
-{
+.header{
     height:100px;
     text-align: center;
     min-width:560px;
 }
-#main
-{
+
+.main{
     background-color: rgb(245,245,245);
      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     text-align:center;
@@ -18,17 +17,18 @@ body{
     min-width:560px;
 }
 
-h1
-{
+h1{
     font-size:24px;
     font-weight:none;
 }
-#title_story{
+
+.story_title{
     padding-top:30px;
     padding-bottom:30px
 }
-#story{
- background-color: rgb(234,234,234); 
+
+.story{
+    background-color: rgb(234,234,234); 
     padding-top:10px;
     padding-bottom:10px;
     padding-left: 20px;
@@ -37,44 +37,48 @@ h1
     margin:auto;
     margin-bottom:20px;
 }
+
 .box{
     margin-top:10px;
     margin-bottom:10px;
     width:520px;
-    }
-.storyvid{
+}
+
+.story_video{
     margin-top:10px;
     margin-bottom:10px;
     width:520px;
-    }
+}
+
 @media (min-width: 1080px) {
-    #rightpart{
- position: absolute;
-right: 20px;
-top: 300px;
+    .rightpart{
+        position: absolute;
+        right: 20px;
+        top: 300px;
     }
-    .storepic{
+    .appstore_pic{
         float:left;
           }
-    #sharebox{
+    .share_box{
         float:left;
     }
 }
 
 @media (max-width: 1080px) {
-    .storepic{
+    .appstore_pic{
        width:300px;  }
 }
 
-#rightpart{
+.rightpart{
     text-align: center;
-
     margin:auto;
     margin-top:10px;
 }
-.storepic{
+
+.appstore_pic{
     margin-bottom:30px;
 }
+
 .share_box{
     background-color: rgb(234,234,234); 
     padding:15px;
@@ -83,10 +87,10 @@ top: 300px;
     height:86px;
     visibility:hidden;
 }
-.sharebutton{
+
+.share_button{
     float:left;
     width:50px;
     margin-right:8px;
     margin-left:8px;
 }
-
