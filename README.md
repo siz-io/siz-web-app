@@ -6,5 +6,5 @@ Siz web app
 ```
 cd www/
 python -mSimpleHTTPServer 9000
-# open http://localhost:9000/story.html#slug-of-a-story
+open http://localhost:9000/story.html#slug-of-a-story  # change slug-of-a-story by a valid slug
 ```
