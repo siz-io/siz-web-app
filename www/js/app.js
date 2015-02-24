@@ -4,8 +4,8 @@ var STORY_SLUG = retrieveStorySlugFromUrl();
 var BOX_WIDTH = 520;
 
 function retrieveStorySlugFromUrl(){
-	var storySlugInUrlRegex = /^\/stories\/([a-z1-9A-Z-]{1,100})$/g;
-	var storySlugRegex = /^#[a-z1-9A-Z-]{2,100}$/;
+	var storySlugInUrlRegex = /^\/stories\/([a-z0-9A-Z-]{1,100})$/g;
+	var storySlugRegex = /^#[a-z0-9A-Z-]{2,100}$/;
 
 	var matches = storySlugInUrlRegex.exec(window.location.pathname);
 	if(matches != null)
