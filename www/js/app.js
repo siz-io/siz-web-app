@@ -203,6 +203,11 @@ function showStory(story)
 	{
 		document.getElementById('story_video').appendChild(youtubeToDom(story.source));
 	}
+    //added by Axel, go to video
+    if(window.location.href.indexOf("srctum") > -1)
+    {
+        window.location.href="#story_video";
+    }
 	//addVideoFallback();
 	playAllVideo();
 	showShare();
