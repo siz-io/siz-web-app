@@ -195,7 +195,7 @@ function showErrorStory()
 
 function showStory(story)
 {	
-	document.title = 'SIZ - '+story.title;
+	document.title = story.title+ '- SIZ'+;
 	document.getElementById('story_title').innerHTML = story.title;
 	var storyNode = document.getElementById('story_boxes');
 	storyNode.parentNode.replaceChild(storyToDom(story),storyNode);
