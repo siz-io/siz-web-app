@@ -1,6 +1,7 @@
 var API_ENDPOINT = 'https://api.siz.io';
 var BROWSER = detectBrowser();
 var STORY_SLUG = retrieveStorySlugFromUrl();
+var SIZ_APP_URI = 'siz://stories/'+STORY_SLUG;
 var BOX_WIDTH = 520;
 
 function retrieveStorySlugFromUrl(){
@@ -217,4 +218,19 @@ function showShare()
 	document.getElementById('share_box').style.visibility='visible';
 }
 
-retrieveToken()
+function checkCustomURI() {
+    var iframe = document.createElement("iframe")
+    iframe.style.border = "none"
+    iframe.style.width = "1px"
+    iframe.style.height = "1px"
+    iframe.src = SIZ_APP_URI
+    document.body.appendChild(iframe)
+}
+
+function loadApp() {
+    if("safari_ios"===BROWSER) 
+        checkCustomURI()
+
+    retrieveToken()
+}
+
