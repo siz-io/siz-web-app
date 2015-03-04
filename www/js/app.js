@@ -176,7 +176,7 @@ function youtubeToDom(source)
 	iframe.width='520';
 	iframe.height='315';
 	iframe.src='https://www.youtube.com/embed/'+source.id;
-	iframe.frameborder='0';
+	iframe.frameBorder='0';
 	iframe.allowfullscreen=true;
 	return iframe;
 }
