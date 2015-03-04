@@ -1,8 +1,14 @@
 var API_ENDPOINT = 'https://api.siz.io';
 var BROWSER = detectBrowser();
+var IS_MOBILE = isMobile();
 var STORY_SLUG = retrieveStorySlugFromUrl();
 var SIZ_APP_URI = 'siz://stories/'+STORY_SLUG;
 var BOX_WIDTH = 520;
+
+
+function isMobile(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+}
 
 function retrieveStorySlugFromUrl(){
 	var storySlugInUrlRegex = /^\/stories\/([a-z0-9A-Z-]{1,100})$/g;
@@ -19,13 +25,7 @@ function retrieveStorySlugFromUrl(){
 function detectBrowser()
 {
 	if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0)
-	{
-		if( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false )
-		{
-			return 'safari_ios';
-		}
 		return 'safari';
-	}
 	if(typeof InstallTrigger !== 'undefined')
 		return 'firefox';
 	if(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
@@ -80,7 +80,7 @@ function retrieveStory(token,slug)
 
 function boxToDom(box)
 {
-	if(['chrome','ie','safari','opera'].indexOf(BROWSER) > -1)
+	if(['chrome','ie','safari','opera'].indexOf(BROWSER) > -1 && !IS_MOBILE)
 	{
 		return boxToDomVideo(box);
 	}
@@ -121,14 +121,6 @@ function boxToDomVideo(box)
 			source.src=format.href;
 			source.type='video/'+format.type;
 			video.appendChild(source);
-		}
-		else if('gif' === format.type)
-		{
-			var image = document.createElement('img');
-			image.src = format.href;
-			image.width = BOX_WIDTH;
-			image.height = heightRatio(box.width,box.height);;
-			video.appendChild(image);
 		}
 	}
 	return video;
@@ -228,7 +220,7 @@ function checkCustomURI() {
 }
 
 function loadApp() {
-    if("safari_ios"===BROWSER) 
+    if("safari"===BROWSER && IS_MOBILE) 
         checkCustomURI()
 
     retrieveToken()
