@@ -1,6 +1,7 @@
 function start() {
     overlay();
     gotovideo();
+    alertAndroid();
 }
 
 function overlay() {
@@ -14,13 +15,21 @@ function overlay() {
     }
 }
 
-
+function alertAndroid() {
+    if((navigator.userAgent.match(/Android/i)) ) {
+    
+var r = confirm("We are searching for Beta Testers for our amazing Android app. Would you like to be part of it?");
+if (r == true) {
+window.location.href='http://siz-app.launchrock.com/';
+        }
+    }
+}
 
 function gotovideo() {
     
     
     document.getElementById('story_video').addEventListener('load', function() {
-        console.log("ok");
+        
     
   window.location.href="#story_video";
 });
