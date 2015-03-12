@@ -39,4 +39,4 @@ TODO
 
 - Update Dockerfile
 - Update Vagrantfile
-- Delete `www` and `provisioning` folders
+- Delete `provisioning` folder ?
