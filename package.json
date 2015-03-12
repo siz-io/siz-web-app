@@ -6,7 +6,9 @@
   "dependencies": {
     "consolidate": "^0.11.0",
     "express": "^4.12.2",
-    "hogan.js": "^3.0.2"
+    "hogan.js": "^3.0.2",
+    "mkdirp": "^0.5.0",
+    "request": "^2.53.0"
   },
   "devDependencies": {
     "browserify": "^9.0.3",

@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>SIZ</title>
+  <meta charset="utf-8">
+  <title>Siz - {{title}}</title>
+  <meta name="description" content="The best videos are on the Siz app !">
+
+  {{! FB SHARE }}
+  <meta property="fb:app_id" content="592980600767291">
+  <meta property="og:type" content="video.other">
+  <meta property="og:site_name" content="Siz">
+  <meta property="og:url" content="{{shareUrl}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="The best videos are on the Siz app !">
+  <meta property="og:image" content="{{picture.href}}">
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=560">
   <link rel="stylesheet" href="/static/css/main.css">
@@ -22,7 +34,7 @@
   </div>
   <div class="main">
     <div class="story_title">
-      <h1 id="story_title"></h1>
+      <h1>{{title}}</h1>
     </div>
 
     <div class="story_container">
@@ -32,21 +44,29 @@
         </div>
       </div>
       <div class="rightpart">
-        <a href="http://ad.apps.fm/CL9wdn36rL36IlNMC7hjjvE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyplLn3FQ9Yn0PUtVvuWYZSMn-2sILGiWD4EUofgGxvuTfwmGoCp43dyUyi8sCzsPeK"><img src="/static/img/appstore.png" class="appstore_pic"></a> <br/>
+        <a href="http://ad.apps.fm/CL9wdn36rL36IlNMC7hjjvE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyplLn3FQ9Yn0PUtVvuWYZSMn-2sILGiWD4EUofgGxvuTfwmGoCp43dyUyi8sCzsPeK">
+          <img src="/static/img/appstore.png" class="appstore_pic">
+        </a>
+        <br/>
         <div id="share_box" class="share_box">
           Share this story
-          <hr>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=url" id="share_facebook"> <img src="/static/img/facebook.png" class="share_button"> 
+          <br>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}">
+            <img src="/static/img/facebook.png" class="share_button">
           </a>
-          <a href="https://twitter.com/intent/tweet?url=url&original_referer=url" id="share_twitter">
+          <a href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&original_referer={{encodedShareUrl}}">
             <img src="/static/img/twitter.png" class="share_button">
           </a>
-          <a href="mailto:?body=url" id="share_mail" ><img src="/static/img/mail.png" class="share_button">
+          <a href="mailto:?body={{encodedShareUrl}}">
+            <img src="/static/img/mail.png" class="share_button">
           </a>
         </div>
       </div>
     </div>
   </div>
+  <script>
+    window._storyData = {{{JSON}}};
+  </script>
   <script src="/static/js/main.js"></script>
 </body>
 </html>

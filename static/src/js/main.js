@@ -1,6 +1,5 @@
 /* jshint latedef: false */
 
-var API_ENDPOINT = 'https://api.siz.io';
 var BROWSER = detectBrowser();
 var IS_MOBILE = isMobile();
 var STORY_SLUG = retrieveStorySlugFromUrl();
@@ -29,43 +28,6 @@ function detectBrowser() {
 	if (!!window.chrome) return 'chrome';
 	if ( /*@cc_on!@*/ false || !!document.documentMode) return 'ie';
 	return 'unknown';
-}
-
-function retrieveToken() {
-	var request = new XMLHttpRequest();
-	request.open('POST', API_ENDPOINT + '/tokens');
-	request.setRequestHeader('Content-Type', 'application/json');
-	request.onload = function () {
-		if (request.status === 201) {
-			var token = JSON.parse(request.responseText).tokens;
-			retrieveStory(token, STORY_SLUG);
-		} else {
-			showErrorStory();
-		}
-	};
-	request.onerror = function () {
-		showErrorStory();
-	};
-	request.send('{}');
-}
-
-function retrieveStory(token, slug) {
-	var request = new XMLHttpRequest();
-	request.open('GET', API_ENDPOINT + '/stories?slug=' + slug);
-	request.setRequestHeader('X-Access-Token', token.id);
-	request.setRequestHeader('Content-Type', 'application/json');
-	request.onload = function () {
-		if (request.status === 200) {
-			var story = JSON.parse(request.responseText).stories;
-			showStory(story);
-		} else {
-			showErrorStory();
-		}
-	};
-	request.onerror = function () {
-		showErrorStory();
-	};
-	request.send();
 }
 
 function boxToDom(box) {
@@ -140,28 +102,13 @@ function youtubeToDom(source) {
 	return iframe;
 }
 
-function showErrorStory() {
-	document.getElementById('story_boxes').innerHTML = 'Impossible to load your story. Try with the app.';
-}
-
 function showStory(story) {
-	document.title = 'SIZ - ' + story.title;
-	document.getElementById('story_title').innerHTML = story.title;
 	var storyNode = document.getElementById('story_boxes');
 	storyNode.parentNode.replaceChild(storyToDom(story), storyNode);
 	if (story.source.type === 'youtube') {
 		document.getElementById('story_video').appendChild(youtubeToDom(story.source));
 	}
 	playAllVideo();
-	showShare();
-}
-
-function showShare() {
-	var encodedURL = encodeURIComponent(document.URL);
-	document.getElementById('share_facebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodedURL;
-	document.getElementById('share_twitter').href = 'https://twitter.com/intent/tweet?url=' + encodedURL + '&original_referer=' + encodedURL;
-	document.getElementById('share_mail').href = 'mailto:?body=' + encodedURL;
-	document.getElementById('share_box').style.visibility = 'visible';
 }
 
 function checkCustomURI() {
@@ -175,7 +122,7 @@ function checkCustomURI() {
 
 function loadApp() {
 	if ('safari' === BROWSER && IS_MOBILE) checkCustomURI();
-	retrieveToken();
+	showStory(window._storyData);
 }
 
 loadApp();
