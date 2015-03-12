@@ -1,10 +1,42 @@
-# siz-web-app
-Siz web app
+Siz Web App
+===========
 
-# Launch an HTTP server to debug
+**All these commands run in `development` mode by default.**
 
+**Set `NODE_ENV` environment variable to `production` for production mode.**
+
+### Launch server
 ```
-cd www/
-python -mSimpleHTTPServer 9000
-open http://localhost:9000/story.html#slug-of-a-story  # change slug-of-a-story by a valid slug
+node server.js
+open https://localhost/stories/ball-pit-plus-mongooses-awesome
 ```
+
+### Lint (check syntax)
+```bash
+# JS
+gulp lint-js
+
+# All
+gulp lint
+```
+
+### Build
+```bash
+# Client js
+gulp build-client-js
+
+# All
+gulp build
+```
+
+### Lint + Build
+```
+gulp
+```
+
+TODO
+====
+
+- Update Dockerfile
+- Update Vagrantfile
+- Delete `www` and `provisioning` folders
