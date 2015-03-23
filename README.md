@@ -14,24 +14,24 @@ open https://localhost/stories/ball-pit-plus-mongooses-awesome
 ### Lint (check syntax)
 ```bash
 # JS
-gulp lint-js
+npm run gulp lint-js
 
 # All
-gulp lint
+npm run gulp lint
 ```
 
 ### Build
 ```bash
 # Client js
-gulp build-client-js
+npm run gulp build-client-js
 
 # All
-gulp build
+npm run gulp build
 ```
 
 ### Lint + Build
 ```
-gulp
+npm run gulp
 ```
 
 TODO
