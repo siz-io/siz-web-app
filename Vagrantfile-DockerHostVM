@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# For sytems that don't natively support Docker (Win / OSX)
+
+Vagrant.configure("2") do |config|
+
+  # Machine name
+  config.vm.define "docker-host-vm" do |d| end
+
+  config.vm.box = "mitchellh/boot2docker"
+
+  config.vm.network "forwarded_port", guest: 8081, host: 8081
+
+  config.vm.provider "virtualbox" do |v|
+    # On VirtualBox, we don't have guest additions or a functional vboxsf
+    # in TinyCore Linux, so tell Vagrant that so it can be smarter.
+    v.check_guest_additions = false
+    v.functional_vboxsf     = false
+  end
+
+  # b2d doesn't support NFS
+  config.nfs.functional = false
+
+  # b2d doesn't persist filesystem between reboots
+  if config.ssh.respond_to?(:insert_key)
+    config.ssh.insert_key = false
+  end
+end
