@@ -1,6 +1,7 @@
 Siz Web App
 ===========
 
+All you need is ~~love~~ [Vagrant](https://www.vagrantup.com/downloads.html).
 
 ## Launch development server
 ```bash
