@@ -65,7 +65,7 @@ function getToken(cb) {
 
 // Server start
 function startServer() {
-  app.listen(9000, function (err) {
+  app.listen(1515, function (err) {
     if (err) return console.log(err.stack || err);
     console.log('Server start on port %s in %s mode', this.address().port, constants.MODE);
   });

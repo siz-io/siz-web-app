@@ -1,0 +1,1 @@
+vagrant ssh -c 'docker exec -ti siz-web-app /bin/bash'
