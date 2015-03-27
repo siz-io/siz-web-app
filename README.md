@@ -7,6 +7,11 @@ Siz Web App
 vagrant up
 ./vmconnect
 node server.js
+
+# Do the dev stuff you want...
+npm install --save a-cool-module
+npm run gulp # cf infra
+# ...
 ```
 
 Visit [http://localhost:1515/stories/ball-pit-plus-mongooses-awesome](http://localhost:1515/stories/ball-pit-plus-mongooses-awesome)
