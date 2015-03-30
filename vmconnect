@@ -1,1 +1,6 @@
-vagrant ssh -c 'docker exec -ti siz-web-app /bin/bash'
+if vagrant ssh -c 'docker exec -ti siz-web-app /bin/bash'
+  then echo "Ended connection to docker container. Bye."
+else
+  echo "Restarting docker container..."
+  vagrant ssh -c 'docker start siz-web-app && docker exec -ti siz-web-app /bin/bash'
+fi

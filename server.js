@@ -41,6 +41,23 @@ app.get('/stories/:slug', function (req, res) {
   });
 });
 
+// Embedded Stories
+app.get('/embed/:slug', function (req, res) {
+  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+    try {
+      var story = body.stories;
+      if (!story) throw new Error();
+      story.shareUrl = req.protocol + '://' + req.headers.host + req.url;
+      story.encodedShareUrl = encodeURIComponent(story.shareUrl);
+      story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
+      res.render('embed', story);
+    } catch (err) {
+      res.statusCode = apiRes.statusCode;
+      res.render('error');
+    }
+  });
+});
+
 // API token retrieval
 function getToken(cb) {
   try {
