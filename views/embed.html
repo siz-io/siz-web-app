@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
   <title>Siz - {{title}}</title>
+
+  <!-- Mobile rendering -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <!-- Google description -->
   <meta name="description" content="The best videos are on the Siz app !">
 
-  {{! FB SHARE }}
+  <!-- Facebook meta tags -->
   <meta property="fb:app_id" content="592980600767291">
   <meta property="og:type" content="video.other">
   <meta property="og:site_name" content="Siz">
@@ -14,9 +18,11 @@
   <meta property="og:description" content="The best videos are on the Siz app !">
   <meta property="og:image" content="{{picture.href}}">
 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=560">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/embed/main.css">
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+
+  <!-- Google Analytics -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -26,11 +32,55 @@
     ga('create', 'UA-57580957-1', 'auto');
     ga('send', 'pageview');
   </script>
+
 </head>
 <body>
+
+  <div class="title">{{title}}</div>
+
+  <div id="grid">
+    <div id="gif0" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif1" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif2" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif3" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+  </div>
+
+  <div class="actions-container">
+    <div class="actions">
+      <a href="#" class="share-btn"></a>
+      <a href="#" class="play-btn"></a>
+    </div>
+  </div>
+
+  <div id="player-container" class="hidden">
+    <div id="player-placeholder"></div>
+    <a class="right-action close-btn" href="#"></a>
+    <a class="right-action share-btn" href="#"></a>
+  </div>
+
+  <div id="sharebox-container">
+    <div id="sharebox">
+      <h2>Share this story</h2>
+      <a class="share-sprite-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}" target="_blank"></a>
+      <a class="share-sprite-twitter" href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&original_referer={{encodedShareUrl}}" target="_blank"></a>
+      <a class="share-sprite-mail" href="mailto:?body={{encodedShareUrl}}" target="_blank"></a>
+    </div>
+  </div>
+
+
+  <!-- Story data preloaded by web server -->
   <script>
     window._storyData = {{{JSON}}};
   </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="/static/js/embed/main.js"></script>
 </body>
 </html>
