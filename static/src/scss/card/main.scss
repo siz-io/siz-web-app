@@ -1,0 +1,26 @@
+@import "lib/reset";
+
+body {
+  background-color: #F0F0F0;
+}
+
+.header {
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+  .logo {
+    height: 60px;
+  }
+  h2 {
+    margin-top: -10px;
+    font-size: 14px;
+  }
+}
+
+iframe {
+  display: block;
+  margin: 20px auto;
+  width: 720px;
+  height: 405px;
+}
