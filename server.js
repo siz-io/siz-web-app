@@ -30,10 +30,27 @@ app.get('/card/:slug', function (req, res) {
     try {
       var story = body.stories;
       if (!story) throw new Error();
-      story.shareUrl = req.protocol + '://' + req.headers.host + req.url;
+      story.shareUrl = req.protocol + '://' + req.headers.host + '/card/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.render('card', story);
+    } catch (err) {
+      res.statusCode = apiRes.statusCode;
+      res.render('error');
+    }
+  });
+});
+
+// Embedded Stories
+app.get('/embed/:slug', function (req, res) {
+  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+    try {
+      var story = body.stories;
+      if (!story) throw new Error();
+      story.shareUrl = req.protocol + '://' + req.headers.host + '/card/' + story.slug;
+      story.encodedShareUrl = encodeURIComponent(story.shareUrl);
+      story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
+      res.render('embed', story);
     } catch (err) {
       res.statusCode = apiRes.statusCode;
       res.render('error');
@@ -51,23 +68,6 @@ app.get('/stories/:slug', function (req, res) {
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.render('story', story);
-    } catch (err) {
-      res.statusCode = apiRes.statusCode;
-      res.render('error');
-    }
-  });
-});
-
-// Embedded Stories
-app.get('/embed/:slug', function (req, res) {
-  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
-    try {
-      var story = body.stories;
-      if (!story) throw new Error();
-      story.shareUrl = req.protocol + '://' + req.headers.host + req.url;
-      story.encodedShareUrl = encodeURIComponent(story.shareUrl);
-      story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
-      res.render('embed', story);
     } catch (err) {
       res.statusCode = apiRes.statusCode;
       res.render('error');
