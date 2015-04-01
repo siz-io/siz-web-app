@@ -50,7 +50,7 @@ gulp.task('build-css', ['copy-img'], function () {
 });
 
 gulp.task('copy-img', function () {
-  return gulp.src(['static/src/img/**/*.png', '!static/src/img/sprite/**/*.png']).
+  return gulp.src(['static/src/img/**/*.png', 'static/src/img/**/*.svg', '!static/src/img/sprite/**/*.png']).
   pipe(gulp.dest('static/dist/img'));
 });
 
