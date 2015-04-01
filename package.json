@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "browserify": "^9.0.3",
-    "fade": "^0.2.0",
     "gulp": "^3.8.11",
     "gulp-compass": "^2.0.4",
     "gulp-jshint": "^1.9.2",
