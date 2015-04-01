@@ -22,5 +22,22 @@ iframe {
   display: block;
   margin: 20px auto;
   width: 720px;
-  height: 405px;
+  height: 720px * 9 / 16;
 }
+
+@media (max-width : 740px) {
+  iframe {
+    margin: 10px auto;
+    width: 600px;
+    height: 600px * 9 / 16;
+  }
+}
+
+@media (max-width : 620px) {
+  iframe {
+    margin: 10px auto;
+    width: 340px;
+    height: 340px * 9 / 16 * 4;
+  }
+}
+
