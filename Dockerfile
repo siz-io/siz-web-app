@@ -8,9 +8,6 @@ ENV APP_DIR /var/www/$APP_NAME
 
 RUN mkdir -p $APP_DIR
 COPY . $APP_DIR/
-RUN rm -rf $APP_DIR/node_modules
-RUN rm -rf $APP_DIR/tmp
-RUN rm -rf $APP_DIR/static/dist
 
 RUN adduser --disabled-login --gecos "" $USER
 RUN chown -R $USER:$USER $APP_DIR
@@ -18,5 +15,8 @@ RUN chown -R $USER:$USER $APP_DIR
 WORKDIR $APP_DIR
 USER $USER
 
+RUN npm install
+RUN npm run gulp --production
+
 EXPOSE 1515
-CMD ["sh", "-c", "npm install && npm run gulp --production && npm start --production"]
+CMD npm start --production
