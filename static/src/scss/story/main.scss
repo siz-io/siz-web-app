@@ -1,107 +1,74 @@
 @import "lib/reset";
+@import "lib/button-icons";
 
-body{
-    margin: auto;
+@import "story/popover";
+
+body {
+  background-color: #F0F0F0;
 }
 
-.header{
-    height:100px;
-    text-align: center;
-    min-width:560px;
+.header {
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+  .logo {
+    height: 60px;
+  }
+  h2 {
+    margin-top: -10px;
+    font-size: 14px;
+  }
+
+  .app-download {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
 }
 
-.main{
-    background-color: rgb(245,245,245);
-     font-family: "Montserrat", sans-serif;
-    color:rgb(74,74,74);
-    padding-bottom:10px;
-    min-width:560px;
+iframe {
+  display: block;
+  margin: 20px auto;
+  width: 720px;
+  height: 720px * 9 / 16;
 }
 
-h1{
-    font-size:24px;
-    font-weight:none;
+.container {
+  position: relative;
+  width: 720px;
+  margin: auto;
 }
 
-.story_title{
-    text-align:center;
-    padding-top:30px;
-    padding-bottom:30px
+@media (max-width : 740px) {
+  iframe {
+    margin: 10px auto;
+    width: 600px;
+    height: 600px * 9 / 16;
+  }
+  .container {
+    width: 600px;
+  }
 }
 
-.story{
-    background-color: rgb(234,234,234);
-    padding-top:10px;
-    padding-bottom:10px;
-    padding-left: 20px;
-    padding-right:20px;
-    width:520px;
-    margin:auto;
-    margin-bottom:20px;
-}
+@media (max-width : 620px) {
+  iframe {
+    margin: 10px auto;
+    width: 340px;
+    height: 340px * 9 / 16 * 4;
+  }
+  .container {
+    width: 340px;
+  }
 
-.box{
-    margin-top:10px;
-    margin-bottom:10px;
-    width:520px;
-}
+  .app-download.ios {
+    width: 101px;
+    height: 30px;
+  }
 
-.story_video{
-    margin-top:10px;
-    margin-bottom:10px;
-    width:520px;
-}
+  .app-download.android {
+    width: 97px;
+    height: 34px;
+  }
 
-@media (min-width: 1120px) {
-    .story_container{
-        position: relative;
-        width:1070px;
-        margin: auto;
-    }
-    .rightpart{
-        position: absolute;
-        right: 0px;
-        top: 300px;
-    }
-    .appstore_pic{
-        float:left;
-          }
-    .share_box{
-        float:left;
-    }
 }
-
-@media (max-width: 1120px) {
-    .appstore_pic{
-       width:300px;
-    }
-    .rightpart{
-       text-align: center;
-    }
-}
-
-.rightpart{
-    margin:auto;
-    margin-top:10px;
-}
-
-.appstore_pic{
-    margin-bottom:30px;
-    width:230px;
-}
-
-.share_box{
-    background-color: rgb(234,234,234);
-    padding:15px;
-    width:200px;
-    margin:auto;
-    height:86px;
-}
-
-.share_button{
-    float:left;
-    width:50px;
-    margin-right:8px;
-    margin-left:8px;
-}
-

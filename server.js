@@ -24,16 +24,16 @@ app.get('/', function (req, res) {
   res.render('app');
 });
 
-// Card
-app.get('/card/:slug', function (req, res) {
+// Story
+app.get('/stories/:slug', function (req, res) {
   request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
     try {
       var story = body.stories;
       if (!story) throw new Error();
-      story.shareUrl = req.protocol + '://' + req.headers.host + '/card/' + story.slug;
+      story.shareUrl = req.protocol + '://' + req.headers.host + '/stories/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
-      res.render('card', story);
+      res.render('story', story);
     } catch (err) {
       res.statusCode = apiRes.statusCode;
       res.render('error');
@@ -47,7 +47,7 @@ app.get('/embed/:slug', function (req, res) {
     try {
       var story = body.stories;
       if (!story) throw new Error();
-      story.shareUrl = req.protocol + '://' + req.headers.host + '/card/' + story.slug;
+      story.shareUrl = req.protocol + '://' + req.headers.host + '/stories/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.render('embed', story);

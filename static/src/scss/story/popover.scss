@@ -1,0 +1,43 @@
+.app_overlay{
+  z-index:101;
+  background-color:white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  display:none;
+  padding: 20px;
+}
+
+.logo_overlay img{
+  height: 40px;
+}
+
+.text_overlay {
+  margin: 10px 0;
+  div{
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.button_to_app{
+  max-width: 360px;
+  margin: auto;
+  background-color: rgb(255,0,30);
+  border-radius: 10px;
+  color:white;
+  padding: 10px;
+}
+
+.screen_overlay{
+  margin: 20px auto;
+  max-width: 360px;
+}
+
+.back_to_page{
+  font-style:normal;
+  font-size: 14px;
+}

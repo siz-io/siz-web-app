@@ -20,7 +20,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/story/main.css">
-  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
 
   <!-- Google Analytics -->
   <script>
@@ -35,44 +35,42 @@
 
 </head>
 <body>
-  <div class="header">
-    <img src="/static/img/siz.png">
-  </div>
-  <div class="main">
-    <div class="story_title">
-      <h1>{{title}}</h1>
-    </div>
 
-    <div class="story_container">
-      <div class="story">
-        <div id="story_boxes">Your story is loading ... Download the app for fast loading</div>
-        <div id="story_video" class="story_video">
-        </div>
+  <!-- Popover -->
+  <div class="app_overlay" id="overlay">
+    <div class="logo_overlay">
+      <img src="/static/img/logo_overlay.png">
+    </div>
+    <div class="text_overlay">
+      <div class="intro_overlay">
+        Siz works best on our app
       </div>
-      <div class="rightpart">
-        <a href="http://ad.apps.fm/CL9wdn36rL36IlNMC7hjjvE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyplLn3FQ9Yn0PUtVvuWYZSMn-2sILGiWD4EUofgGxvuTfwmGoCp43dyUyi8sCzsPeK">
-          <img src="/static/img/appstore.png" class="appstore_pic">
-        </a>
-        <br/>
-        <div id="share_box" class="share_box">
-          Share this story
-          <br>
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}">
-            <img src="/static/img/facebook.png" class="share_button">
-          </a>
-          <a href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&original_referer={{encodedShareUrl}}">
-            <img src="/static/img/twitter.png" class="share_button">
-          </a>
-          <a href="mailto:?body={{encodedShareUrl}}">
-            <img src="/static/img/mail.png" class="share_button">
-          </a>
-        </div>
+      <div class="main_overlay">
+        It'll look like 10 times better
       </div>
     </div>
+    <a href="http://ad.apps.fm/mEK4iaC5fDyHIkmFZ3ie2PE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyp1l2Ppd_cR4XQyI97NCLIZeLmZdPOcw8KmZqWpyf4zjc">
+      <div class="button_to_app" >
+        Continue in app
+      </div>
+    </a>
+    <div class="screen_overlay">
+      <img src="/static/img/iphonescreen.png">
+    </div>
+    <div class="back_to_page" id="backtoapp">
+      Continue in browser
+    </div>
   </div>
-  <script>
-    window._storyData = {{{JSON}}};
-  </script>
+
+  <!-- Page content -->
+  <div class="header">
+    <div class="container">
+      <a href="#ios/android-link-placed-here-by-JS" class="app-download" target="_blank"></a>
+      <img class="logo" src="/static/img/siz.png" alt="Siz">
+      <h2>The fastest way to discover videos.</h2>
+    </div>
+  </div>
+  <iframe src="/embed/{{slug}}"></iframe>
   <script src="/static/js/story/main.js"></script>
 </body>
 </html>
