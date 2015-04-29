@@ -27,11 +27,6 @@ body {
   }
 }
 
-iframe {
-  overflow: hidden;
-  display: block;
-}
-
 .container {
   max-width: 740px;
   margin: auto;
@@ -52,7 +47,7 @@ iframe {
 
 @each $width in 320px, 360px {
   @media only screen and (min-device-width : $width) and (orientation: portrait) {
-    iframe {
+    .video-strip {
       margin: 0 auto;
       width: $width;
       height: $width * 9 / 16 * 4;
@@ -66,7 +61,7 @@ iframe {
       min-width: $width;
     }
 
-    iframe {
+    .video-strip {
       margin: 0 auto;
       width: $width;
       height: $width * 9 / 16;
@@ -78,7 +73,7 @@ iframe {
       min-width: $width;
     }
 
-    iframe {
+    .video-strip {
       margin: 0 auto;
       width: $width;
       height: $width * 9 / 16;
@@ -87,7 +82,7 @@ iframe {
 }
 
 @media only screen and (min-width: 720px) {
-  iframe {
+  .video-strip {
     margin: 20px auto;
     width: 720px;
     height: 720px * 9 / 16;
