@@ -37,28 +37,30 @@
 <body>
 
   <!-- Popover -->
-  <div class="app_overlay" id="overlay">
-    <div class="logo_overlay">
-      <img src="/static/img/logo_overlay.png">
-    </div>
-    <div class="text_overlay">
-      <div class="intro_overlay">
-        Siz works best on our app
+  <div id="overlay">
+    <div class="content-overlay">
+      <div class="logo-overlay">
+        <img src="/static/img/logo_overlay.png">
       </div>
-      <div class="main_overlay">
-        It'll look like 10 times better
+      <div class="text-overlay">
+        <div class="intro-overlay">
+          Siz works best on our app
+        </div>
+        <div class="main-overlay">
+          It'll look like 10 times better
+        </div>
       </div>
-    </div>
-    <a href="http://ad.apps.fm/mEK4iaC5fDyHIkmFZ3ie2PE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyp1l2Ppd_cR4XQyI97NCLIZeLmZdPOcw8KmZqWpyf4zjc">
-      <div class="button_to_app" >
-        Continue in app
+      <a href="http://ad.apps.fm/mEK4iaC5fDyHIkmFZ3ie2PE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyp1l2Ppd_cR4XQyI97NCLIZeLmZdPOcw8KmZqWpyf4zjc">
+        <div class="button-to-app" >
+          Continue in app
+        </div>
+      </a>
+      <div class="screen-overlay">
+        <img src="/static/img/iphonescreen.png">
       </div>
-    </a>
-    <div class="screen_overlay">
-      <img src="/static/img/iphonescreen.png">
-    </div>
-    <div class="back_to_page" id="backtoapp">
-      Continue in browser
+      <div class="back-to-page" id="backtoapp">
+        Continue in browser
+      </div>
     </div>
   </div>
 
@@ -70,7 +72,8 @@
       <h2>The fastest way to discover videos.</h2>
     </div>
   </div>
-  <iframe src="/embed/{{slug}}"></iframe>
+
+  <iframe scrolling="no" src="/embed/{{slug}}"></iframe>
   <script src="/static/js/story/main.js"></script>
 </body>
 </html>

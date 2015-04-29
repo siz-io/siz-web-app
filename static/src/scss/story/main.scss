@@ -22,45 +22,22 @@ body {
 
   .app-download {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 10px;
   }
 }
 
 iframe {
+  overflow: hidden;
   display: block;
-  margin: 20px auto;
-  width: 720px;
-  height: 720px * 9 / 16;
 }
 
 .container {
-  position: relative;
-  width: 720px;
+  max-width: 740px;
   margin: auto;
 }
 
-@media (max-width : 740px) {
-  iframe {
-    margin: 10px auto;
-    width: 600px;
-    height: 600px * 9 / 16;
-  }
-  .container {
-    width: 600px;
-  }
-}
-
 @media (max-width : 620px) {
-  iframe {
-    margin: 10px auto;
-    width: 340px;
-    height: 340px * 9 / 16 * 4;
-  }
-  .container {
-    width: 340px;
-  }
-
   .app-download.ios {
     width: 101px;
     height: 30px;
@@ -70,5 +47,50 @@ iframe {
     width: 97px;
     height: 34px;
   }
-
 }
+
+
+@each $width in 320px, 360px {
+  @media only screen and (min-device-width : $width) and (orientation: portrait) {
+    iframe {
+      margin: 0 auto;
+      width: $width;
+      height: $width * 9 / 16 * 4;
+    }
+  }
+}
+
+@each $width in 480px, 568px, 640px {
+  @media only screen and (min-device-height : $width) and (orientation: landscape) {
+    body {
+      min-width: $width;
+    }
+
+    iframe {
+      margin: 0 auto;
+      width: $width;
+      height: $width * 9 / 16;
+    }
+  }
+
+  @media only screen and (min-width : $width) and (orientation: landscape) {
+    body {
+      min-width: $width;
+    }
+
+    iframe {
+      margin: 0 auto;
+      width: $width;
+      height: $width * 9 / 16;
+    }
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  iframe {
+    margin: 20px auto;
+    width: 720px;
+    height: 720px * 9 / 16;
+  }
+}
+
