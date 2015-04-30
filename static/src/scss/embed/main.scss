@@ -218,7 +218,7 @@ html, body {
   margin: auto;
   box-shadow: 0 0 5px rgba(0,0,0,.12);
   background-color: #f0f0f0;
-  height: 115px;
+  height: 150px;
   width: 220px;
 
   h2 {
@@ -229,5 +229,22 @@ html, body {
   a {
     margin: 5px;
     display: inline-block;
+  }
+}
+
+.embed-code {
+  span, input {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  font-family: courier;
+  margin-top: 5px;
+  font-size: 12px;
+  input {
+    border: none;
+    font-family: courier;
+    border-radius: 2px;
+    padding: 5px;
+    width: 160px;
   }
 }

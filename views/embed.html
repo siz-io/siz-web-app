@@ -72,6 +72,10 @@
       <a class="share-sprite-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}" target="_blank"></a>
       <a class="share-sprite-twitter" href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&original_referer={{encodedShareUrl}}" target="_blank"></a>
       <a class="share-sprite-mail" href="mailto:?body={{encodedShareUrl}}" target="_blank"></a>
+      <div class="embed-code">
+        <span>&lt;/&gt;</span>
+        <input type="text" onclick="this.focus();this.select()" readonly="readonly" value='<iframe width="480" height="270" src="{{embedUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>'>
+      </div>
     </div>
   </div>
 

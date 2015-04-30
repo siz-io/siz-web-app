@@ -52,6 +52,7 @@ app.get('/embed/:slug', function (req, res) {
       var story = body.stories;
       if (!story) throw new Error();
       story.shareUrl = req.protocol + '://' + req.headers.host + '/stories/' + story.slug;
+      story.embedUrl = req.protocol + '://' + req.headers.host + '/embed/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.render('embed', story);
