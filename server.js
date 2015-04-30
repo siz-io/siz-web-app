@@ -7,6 +7,7 @@ var mkdirp = require('mkdirp');
 var request = require('request').defaults({
   json: true
 });
+var favicon = require('serve-favicon');
 
 constants.MODE = app.get('env');
 constants.API_ENDPOINT = (constants.MODE === 'production') ? 'https://api.siz.io' : 'http://api.dev.siz.io';
@@ -15,6 +16,9 @@ constants.API_ENDPOINT = (constants.MODE === 'production') ? 'https://api.siz.io
 app.engine('html', cons.hogan);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
+
+// Favicon
+app.use(favicon(__dirname + '/static/dist/img/favicon.ico'));
 
 // Static files
 app.use('/static', express.static('static/dist'));
