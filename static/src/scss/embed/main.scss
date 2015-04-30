@@ -21,6 +21,22 @@ html, body {
   @include background-image(linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0)));
 }
 
+.powered-by {
+  font-size: 10px;
+  float: right;
+  a, a:active, a:visited {
+    color: #fff;
+  }
+  span, img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    height: 25px;
+    margin-left: 3px;
+  }
+}
+
 #grid, .gif, .img-placeholder{
   position: absolute;
 }
