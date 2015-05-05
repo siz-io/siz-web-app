@@ -41,7 +41,7 @@ gulp.task('build-client-js', function () {
 gulp.task('build-css', ['copy-img'], function () {
   return gulp.src('static/src/scss/**/main.scss').
   pipe(compass({
-    'config_file': '.compass-config.rb',
+    'config_file': 'static/src/compass-config.rb',
     css: 'static/dist/css',
     sass: 'static/src/scss',
     environment: process.env.NODE_ENV || 'development'

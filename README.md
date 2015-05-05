@@ -6,8 +6,8 @@ All you need is ~~love~~ [Vagrant](https://www.vagrantup.com/downloads.html).
 ## Launch development server
 ```bash
 vagrant up
-./vmconnect
-node server.js
+vagrant ssh
+npm start
 
 # Do the dev stuff you want...
 npm install --save a-cool-module
@@ -17,22 +17,10 @@ npm run gulp # cf infra
 
 Visit [http://localhost:1515/stories/ball-pit-plus-mongooses-awesome](http://localhost:1515/stories/ball-pit-plus-mongooses-awesome)
 
-
-## Launch "production-like" server
-```bash
-NODE_ENV=production vagrant up
-```
-
-Visit [http://localhost:1515/stories/ball-pit-plus-mongooses-awesome](http://localhost:1515/stories/ball-pit-plus-mongooses-awesome)
-
-
 ## Destroy development environment
 ```bash
 vagrant destroy
 ```
-
-**NB :** Run the above command before switching to development / "production like" modes.
-
 
 ## Commands
 
