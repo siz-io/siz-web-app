@@ -31,6 +31,7 @@ function showPlayer(videoId) {
 
 module.exports = function (story) {
   $('.play-btn').onclick = function (event) {
+    window.ga('send', 'event', 'story', 'play', story.slug);
     event.preventDefault();
     showPlayer(story.source.id);
   };

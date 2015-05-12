@@ -1,8 +1,11 @@
-var displayPoweredBy = true;
+var isEmbed = true; // i.e. not used in /stories page
 try {
-  displayPoweredBy = window.top.location.host !== window.location.host || window.top === window;
+  isEmbed = window.top.location.host !== window.location.host || window.top === window;
 } catch (ignored) {}
-if (displayPoweredBy) document.querySelector('.powered-by').style.display = 'block';
+if (isEmbed) {
+  document.querySelector('.powered-by').style.display = 'block';
+  window.ga('send', 'pageview');
+}
 
 var story = window._storyData;
 story.aspectRatio = story.boxes[0].width / story.boxes[0].height;
