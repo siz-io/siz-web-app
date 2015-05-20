@@ -35,6 +35,10 @@ gulp.task('build-client-js', function () {
 
   return gulp.src('static/src/js/**/main.js').
   pipe(fileBrowserification).
+  on('error', function (error) {
+    console.log('[ERROR] - JS build failed :', error.message);
+    this.emit('end');
+  }).
   pipe(process.env.NODE_ENV === 'production' ? fileMinification : noopStream()).
   pipe(gulp.dest('static/dist/js/'));
 });
@@ -47,6 +51,9 @@ gulp.task('build-css', ['copy-img'], function () {
     sass: 'static/src/scss',
     environment: process.env.NODE_ENV || 'development'
   })).
+  on('error', function () {
+    this.emit('end');
+  }).
   pipe(gulp.dest('static/dist/css'));
 });
 
