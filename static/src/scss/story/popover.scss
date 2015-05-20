@@ -1,0 +1,48 @@
+#overlay {
+  z-index:101;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display:none;
+  background-color:white;
+}
+
+.content-overlay{
+  background-color:white;
+  text-align: center;
+  padding: 20px;
+}
+
+.logo-overlay img{
+  height: 40px;
+}
+
+.text-overlay {
+  margin: 10px 0;
+  div{
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.button-to-app{
+  max-width: 360px;
+  margin: auto;
+  background-color: rgb(255,0,30);
+  border-radius: 10px;
+  color:white;
+  padding: 10px;
+}
+
+.screen-overlay{
+  margin: 20px auto;
+  max-width: 360px;
+}
+
+.back-to-page{
+  font-style:normal;
+  font-size: 14px;
+  padding-bottom: 20px;
+}

@@ -1,0 +1,41 @@
+.play-btn {
+  background-image: url("/static/img/play.png");
+  background-size: 60px !important;
+  &:active {
+    background-image: url("/static/img/play_hl.png");
+  }
+}
+
+.share-btn {
+  background-image: url("/static/img/share.png");
+  &:active {
+    background-image: url("/static/img/share_hl.png");
+  }
+}
+
+.close-btn {
+  background-image: url("/static/img/close.png");
+  &:active {
+    background-image: url("/static/img/close_hl.png");
+  }
+}
+
+.app-download {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: inline-block;
+  &.ios {
+    width: 135px;
+    height: 40px;
+    background-image: url("/static/img/ios-download.svg");
+  }
+
+  &.android {
+    width: 130px;
+    height: 45px;
+    background-image: url("https://developer.android.com/images/brand/en_app_rgb_wo_45.png");
+  }
+}
+
+

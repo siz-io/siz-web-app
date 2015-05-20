@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Siz - {{title}}</title>
+
+  <!-- Mobile rendering -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <!-- Google description -->
+  <meta name="description" content="The best videos are on the Siz app !">
+
+  <!-- Facebook meta tags -->
+  <meta property="fb:app_id" content="592980600767291">
+  <meta property="og:type" content="video.other">
+  <meta property="og:site_name" content="Siz">
+  <meta property="og:url" content="{{shareUrl}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="The best videos are on the Siz app !">
+  <meta property="og:image" content="{{picture.href}}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/embed/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+  <div class="title">
+    <div class="powered-by" style="display:none">
+      <a href="{{shareUrl}}" onclick="window.ga('send', 'event', 'story', 'embed-logo-click', '{{slug}}');" target="_blank">
+        <img src="/static/img/siz-bg.png" alt="Siz">
+      </a>
+    </div>
+    {{title}}
+  </div>
+
+  <div id="grid">
+    <div id="gif0" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif1" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif2" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+    <div id="gif3" class="gif">
+      <div class="img-placeholder"></div>
+    </div>
+  </div>
+
+  <div class="actions-container">
+    <div class="actions">
+      <a href="#" class="share-btn"></a>
+      <a href="#" class="play-btn"></a>
+    </div>
+  </div>
+
+  <div id="player-container" class="hidden">
+    <div id="player-placeholder"></div>
+    <a class="right-action close-btn" href="#"></a>
+    <a class="right-action share-btn" href="#"></a>
+  </div>
+
+  <div id="sharebox-container">
+    <div id="sharebox">
+      <h2>Share this story</h2>
+      <a class="share-sprite-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}" target="_blank"></a>
+      <a class="share-sprite-twitter" href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&original_referer={{encodedShareUrl}}" target="_blank"></a>
+      <a class="share-sprite-mail" href="mailto:?body={{encodedShareUrl}}" target="_blank"></a>
+      <div class="embed-code">
+        <span>&lt;/&gt;</span>
+        <input type="text" onclick="this.focus();this.select()" readonly="readonly" value='<iframe width="480" height="270" src="{{embedUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>'>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Story data preloaded by web server -->
+  <script>
+    window._storyData = {{{JSON}}};
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="/static/js/embed/main.js"></script>
+</body>
+</html>

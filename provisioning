@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Update packages
+apt-get update
+apt-get upgrade -y
+
+# Install Node.js
+curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+apt-get install -y nodejs ruby-full optipng
+
+# Install other depensencies
+apt-get install -y ruby-full optipng
+
+gem install compass
+gem install oily_png
+
+# Build project
+cd /vagrant
+npm install
+npm run gulp
+
+# Go to /vagrant when ssh-ed
+echo 'cd /vagrant' >> /home/vagrant/.bashrc

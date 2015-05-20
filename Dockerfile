@@ -1,6 +1,22 @@
-FROM nginx
-MAINTAINER Julien DAUPHANT
+FROM sizio/node-front
 
-COPY provisioning/default.conf /etc/nginx/conf.d/default.conf
+MAINTAINER The Siz Team
 
-EXPOSE 80
+ENV APP_NAME siz-web-app
+ENV USER $APP_NAME
+ENV APP_DIR /var/www/$APP_NAME
+
+RUN mkdir -p $APP_DIR
+COPY . $APP_DIR/
+
+RUN adduser --disabled-login --gecos "" $USER
+RUN chown -R $USER:$USER $APP_DIR
+
+WORKDIR $APP_DIR
+USER $USER
+
+RUN npm install
+RUN npm run gulp --production
+
+EXPOSE 1515
+CMD npm start --production
