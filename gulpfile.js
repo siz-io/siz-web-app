@@ -7,6 +7,7 @@ var browserify = require('browserify');
 var UglifyJS = require('uglify-js');
 var OptiPng = require('optipng');
 var compass = require('gulp-compass');
+var duplex = require('duplexer');
 
 function noopStream() {
   return map(function (fileContentBuffer) {
@@ -23,7 +24,7 @@ gulp.task('lint-js', function () {
 
 gulp.task('build-client-js', function () {
   var fileBrowserification = transform(function (filename) {
-    return browserify(filename).bundle();
+    return duplex(noopStream(), browserify(filename).bundle());
   });
 
   var fileMinification = map(function (fileContentBuffer) {
@@ -38,7 +39,7 @@ gulp.task('build-client-js', function () {
   pipe(gulp.dest('static/dist/js/'));
 });
 
-gulp.task('build-css', ['copy-img'], function () {
+gulp.task('build-css', ['copy-img'], function () {
   return gulp.src('static/src/scss/**/main.scss').
   pipe(compass({
     'config_file': 'static/src/compass-config.rb',
