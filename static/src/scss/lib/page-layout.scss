@@ -1,0 +1,48 @@
+body {
+  background-color: #F0F0F0;
+}
+
+.header {
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+  .logo {
+    height: 60px;
+  }
+  h2 {
+    margin-top: -10px;
+    font-size: 14px;
+  }
+
+  .app-download {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+.container {
+  max-width: 740px;
+  margin: auto;
+}
+
+@media (max-width : 620px) {
+  .app-download.ios {
+    width: 101px;
+    height: 30px;
+  }
+
+  .app-download.android {
+    width: 97px;
+    height: 34px;
+  }
+}
+
+.not-found {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 40px;
+}

@@ -17,7 +17,7 @@ function noopStream() {
 
 gulp.task('lint-js', function () {
   return gulp.
-  src(['**/*.js', '!node_modules/**', '!static/dist/js/**', '!www/js/app.js']).
+  src(['**/*.js', '!node_modules/**', '!static/dist/js/**']).
   pipe(jshint()).
   pipe(jshint.reporter('jshint-stylish'));
 });
@@ -79,6 +79,7 @@ gulp.task('build', ['build-client-js', 'build-css', 'optimize-img']);
 gulp.task('default', ['lint', 'build']);
 
 gulp.task('watch', function () {
+  gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
   gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
   gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
 });

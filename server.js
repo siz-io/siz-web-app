@@ -1,16 +1,18 @@
 var express = require('express');
-var cons = require('consolidate');
-var constants = require('./lib/constants');
 var app = express();
+var cons = require('consolidate');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var request = require('request').defaults({
-  json: true
-});
 var favicon = require('serve-favicon');
 
-constants.MODE = app.get('env');
-constants.API_ENDPOINT = (constants.MODE === 'production') ? 'https://api.siz.io' : 'http://api.dev.siz.io';
+// API
+var api = {
+  request: require('request').defaults({
+    json: true,
+    baseUrl: (app.get('env') === 'production') ? 'https://api.siz.io' : 'http://api.dev.siz.io'
+  })
+};
+app.set('api', api);
 
 // Views
 app.engine('html', cons.hogan);
@@ -30,7 +32,7 @@ app.get('/', function (req, res) {
 
 // Story
 app.get('/stories/:slug', function (req, res) {
-  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+  api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
     try {
       var story = body.stories;
       if (!story) throw new Error();
@@ -45,9 +47,9 @@ app.get('/stories/:slug', function (req, res) {
   });
 });
 
-// Embedded Stories
+// Embedded Story
 app.get('/embed/:slug', function (req, res) {
-  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+  api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
     try {
       var story = body.stories;
       if (!story) throw new Error();
@@ -58,46 +60,36 @@ app.get('/embed/:slug', function (req, res) {
       res.render('embed', story);
     } catch (err) {
       res.statusCode = apiRes.statusCode;
-      res.render('error');
+      res.render('black', {
+        message: 'Strip not found...'
+      });
     }
   });
 });
 
-// Stories
-app.get('/stories/:slug', function (req, res) {
-  request(constants.API_ENDPOINT + '/stories?slug=' + req.params.slug, function (err, apiRes, body) {
-    try {
-      var story = body.stories;
-      if (!story) throw new Error();
-      story.shareUrl = req.protocol + '://' + req.headers.host + req.url;
-      story.encodedShareUrl = encodeURIComponent(story.shareUrl);
-      story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
-      res.render('story', story);
-    } catch (err) {
-      res.statusCode = apiRes.statusCode;
-      res.render('error');
-    }
-  });
+app.use(function (req, res) {
+  res.status(404).render('error');
 });
 
 // API token retrieval
 function getToken(cb) {
+  var apiToken;
   try {
-    constants.API_TOKEN = fs.readFileSync(__dirname + '/tmp/token', {
+    apiToken = fs.readFileSync(__dirname + '/tmp/token', {
       encoding: 'utf8'
     });
-    cb();
+    cb(null, apiToken);
   } catch (err) {
-    request.post({
-      url: constants.API_ENDPOINT + '/tokens',
+    api.request.post({
+      url: '/tokens',
       body: {}
     }, function (err, res, body) {
       if (err) return cb(err);
       if (res.statusCode >= 400) return cb(new Error('Token creation failed : HTTP error ' + res.statusCode));
-      constants.API_TOKEN = body.tokens.id;
+      apiToken = body.tokens.id;
       mkdirp.sync(__dirname + '/tmp');
-      fs.writeFileSync(__dirname + '/tmp/token', constants.API_TOKEN);
-      cb();
+      fs.writeFileSync(__dirname + '/tmp/token', apiToken);
+      cb(null, apiToken);
     });
   }
 }
@@ -106,15 +98,15 @@ function getToken(cb) {
 function startServer() {
   app.listen(1515, function (err) {
     if (err) return console.log(err.stack || err);
-    console.log('Server start on port %s in %s mode', this.address().port, constants.MODE);
+    console.log('Server start on port %s in %s mode', this.address().port, app.get('env'));
   });
 }
 
-getToken(function (err) {
+getToken(function (err, apiToken) {
   if (err) return console.log(err.stack || err);
-  request = request.defaults({
+  api.request = api.request.defaults({
     headers: {
-      'X-Access-Token': constants.API_TOKEN
+      'X-Access-Token': apiToken
     }
   });
   startServer();
