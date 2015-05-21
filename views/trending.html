@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Siz - Trending video strips for publishers</title>
+
+  <!-- Mobile rendering -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <!-- Google description -->
+  <meta name="description" content="Trending video strips for publishers">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/trending/main.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-57580957-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</head>
+<body>
+
+  <!-- Page content -->
+  <div class="header">
+    <div class="container">
+      <a href="#ios/android-link-placed-here-by-JS" class="app-download" target="_blank"></a>
+      <img class="logo" src="/static/img/siz.png" alt="Siz">
+      <h2>Trending video strips for publishers</h2>
+    </div>
+  </div>
+
+  {{#stories}}
+  <iframe class="video-strip spaced" scrolling="no" src="/embed/{{slug}}" allowfullscreen></iframe>
+  {{/stories}}
+
+  <div class="container">
+    <div class="page-nav">
+      {{#prevPage}}
+      <a class="page-btn left" href="/trending?page={{prevPage}}"><i class="fa fa-arrow-left"></i></a>
+      {{/prevPage}}
+      <em>– Page {{currPage}} –</em>
+      {{#nextPage}}
+      <a class="page-btn right" href="/trending?page={{nextPage}}"><i class="fa fa-arrow-right"></i></a>
+      {{/nextPage}}
+    </div>
+  </div>
+
+  <script src="/static/js/story/main.js"></script>
+</body>
+</html>

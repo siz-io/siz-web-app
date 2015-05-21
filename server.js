@@ -30,6 +30,19 @@ app.get('/', function (req, res) {
   res.render('app');
 });
 
+// Trending page
+app.get('/trending', function (req, res) {
+  var page = Math.min(Math.max(Math.floor(Number(req.query.page)), 0), 10) || 1;
+  api.request('/stories?limit=' + page * 5, function (err, apiRes, body) {
+    res.render('trending', {
+      stories: body.stories.slice((page - 1) * 5),
+      currPage: page,
+      nextPage: page === 50 ? 0 : page + 1,
+      prevPage: page - 1,
+    });
+  });
+});
+
 // Story
 app.get('/stories/:slug', function (req, res) {
   api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {

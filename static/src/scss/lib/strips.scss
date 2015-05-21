@@ -1,0 +1,47 @@
+.video-strip {
+  margin: auto;
+  &.spaced {
+    margin-bottom: 20px;
+  }
+}
+
+@each $width in 320px, 360px {
+  @media only screen and (min-device-width : $width) and (orientation: portrait) {
+    .video-strip {
+      width: $width;
+      height: $width * 9 / 16 * 4;
+    }
+  }
+}
+
+@each $width in 480px, 568px, 640px {
+  @media only screen and (min-device-height : $width) and (orientation: landscape) {
+    body {
+      min-width: $width;
+    }
+
+    .video-strip {
+      width: $width;
+      height: $width * 9 / 16;
+    }
+  }
+
+  @media only screen and (min-width : $width) and (orientation: landscape) {
+    body {
+      min-width: $width;
+    }
+
+    .video-strip {
+      width: $width;
+      height: $width * 9 / 16;
+    }
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .video-strip {
+    width: 720px;
+    height: 720px * 9 / 16;
+  }
+}
+
