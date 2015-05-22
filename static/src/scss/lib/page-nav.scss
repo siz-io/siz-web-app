@@ -1,0 +1,75 @@
+@import "compass/css3/transition";
+
+.page-nav {
+  font-size: 14px;
+  position: relative;
+  text-align: center;
+  margin: 10px;
+  padding-bottom: 20px;
+  a, em {
+    line-height: 30px;
+    padding: 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.page-btn {
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  position: absolute;
+  border: 2px solid #f80000;
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #f80000;
+  overflow: hidden;
+  @include transition(color, .2s);
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f80000;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.left {
+    left: 0;
+    &:before {
+      @include transition(left, .2s);
+      left: 100%;
+    }
+
+    &:hover:before {
+      left: 0;
+    }
+  }
+
+  &.right {
+    right: 0;
+    &:before {
+      @include transition(right, .2s);
+      right: 100%;
+    }
+
+    &:hover:before {
+      right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .page-btn.left {
+    left: 10px;
+  }
+  .page-btn.right {
+    right: 10px;
+  }
+}
