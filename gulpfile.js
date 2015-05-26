@@ -58,7 +58,7 @@ gulp.task('build-css', ['copy-img'], function () {
 });
 
 gulp.task('copy-img', function () {
-  return gulp.src(['static/src/img/**/*.{png,svg,ico}', '!static/src/img/sprite/**']).
+  return gulp.src(['static/src/img/**/*.{png,svg,ico,jpg}', '!static/src/img/sprite/**']).
   pipe(gulp.dest('static/dist/img'));
 });
 

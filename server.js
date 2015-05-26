@@ -27,7 +27,7 @@ app.use('/static', express.static('static/dist'));
 
 // Home page
 app.get('/', function (req, res) {
-  res.render('app');
+  res.render('home');
 });
 
 // Trending page
