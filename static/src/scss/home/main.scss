@@ -1,0 +1,164 @@
+@import "lib/reset";
+@import "lib/buttons";
+@import "lib/button-icons.scss";
+
+body {
+  text-align: center;
+}
+
+.menu a, .menu span {
+  font-size: 12px;
+  display: inline-block;
+}
+
+.menu-top {
+  padding-bottom: 20px;
+  a {
+    color: #fff;
+    padding: 20px 30px;
+  }
+}
+
+.iphone-preview {
+  box-sizing: border-box;
+  padding: 0 20px;
+  min-width: 100%;
+}
+
+.sub-logo {
+  color: #fff;
+  padding: 5px 0 15px 0;
+  letter-spacing: 5px;
+}
+
+.tagline {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #fff;
+  padding: 20px;
+}
+
+.app-downloads {
+  margin-left: -20px;
+}
+
+.app-download {
+  margin: 10px 5px;
+
+  &.android {
+    width: 115.6px;
+    height: 40px;
+    background-image: url("https://developer.android.com/images/brand/en_app_rgb_wo_45.png");
+  }
+}
+
+
+.oblique-top-wrapper {
+  height: 633px;
+  position: relative;
+  overflow: hidden;
+}
+
+.oblique-top {
+  position: absolute;
+  top: 0;
+  left: -1000px;
+  right: -1000px;
+  margin: 0 auto;
+  height: 633px;
+  width: 1920px;
+  min-width: 100%;
+  background: linear-gradient(-45deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0) 47%,
+    rgba(0,0,0,0.2) 55%,
+    rgba(0,0,0,0) 55%,
+    rgba(0,0,0,0) 100%),
+  radial-gradient(circle, rgba(255, 0, 40, 0.9), rgba(184, 0, 65, 0.6)),
+  url("/static/img/home-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.factory-pitch {
+  padding: 0 20px;
+  margin-top: -80px;
+  font-size: 12px;
+  .illustration, .pitch {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .illustration {
+    width: 100px;
+  }
+  .pitch {
+    margin-left: 20px;
+    text-align: left;
+    width: 240px;
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: -5px 0 10px 0;
+    }
+    h2 {
+      margin-top: 12px;
+      font-size: 18px;
+    }
+    strong {
+      color: #f80000;
+      font-weight: 700;
+    }
+  }
+  &:before {
+    content: "";
+    vertical-align: top;
+    display: inline-block;
+    height: 100%;
+  }
+  margin-bottom: 20px;
+}
+
+.oblique-bottom-wrapper {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+}
+
+.oblique-bottom {
+  min-width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: -1000px;
+  right: -1000px;
+  margin: 0 auto;
+  height: 60px;
+  width: 1920px;
+  background-color: #ebebeb;
+}
+
+.menu-bottom {
+  padding-top: 15px;
+  background-color: #ebebeb;
+  color: #8f8f8f;
+  a, span {
+    color: #8f8f8f;
+    padding: 15px;
+  }
+}
+
+.official-pages {
+  z-index: 1;
+  position: relative;
+  height: 0px;
+  top: -15px;
+  a, img {
+    height: 30px;
+    display: inline-block;
+  }
+  a {
+    margin: 2.5px;
+  }
+}
