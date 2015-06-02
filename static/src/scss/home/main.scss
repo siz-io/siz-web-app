@@ -22,7 +22,15 @@ body {
 .iphone-preview {
   box-sizing: border-box;
   padding: 0 20px;
-  min-width: 100%;
+  display: inline-block;
+  max-width: 100%;
+  .strip-preview {
+    position: absolute;
+    top: 6.8%;
+    left: 15.5%;
+    height: 85.5%;
+    width: 69.2%;
+  }
 }
 
 .sub-logo {
@@ -56,7 +64,6 @@ body {
 
 .oblique-top-wrapper {
   height: 633px;
-  position: relative;
   overflow: hidden;
 }
 
@@ -122,7 +129,6 @@ body {
 }
 
 .oblique-bottom-wrapper {
-  position: relative;
   height: 60px;
   overflow: hidden;
 }
@@ -151,7 +157,6 @@ body {
 
 .official-pages {
   z-index: 1;
-  position: relative;
   height: 0px;
   top: -15px;
   a, img {
