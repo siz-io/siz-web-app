@@ -45,7 +45,10 @@
     <div><img style="width:100px" src="/static/img/siz-white.png"></div>
     <div class="sub-logo">Video strips</div>
     <div class="tagline">The fastest way to discover videos</div>
-    <div class="iphone-preview"><img src="/static/img/iphone-preview.png"></div>
+    <div class="iphone-preview">
+      <img src="/static/img/iphone-preview.png" onload="document.querySelector('.strip-preview').src='/static/img/strip-preview.gif'">
+      <img class="strip-preview" src="http://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png">
+    </div>
     <div class="app-downloads">
       <a target="_blank" href="http://ad.apps.fm/-9Jjy4vqyRkZhctV2x6zXfE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypHRmKHsREbVOFLMRngjJC1w" class="app-download ios"></a>
       <a  target="_blank" href="http://siz-app.launchrock.com/" class="app-download android"></a>
