@@ -37,7 +37,7 @@ app.get('/trending', function (req, res) {
     res.render('trending', {
       stories: body.stories.slice((page - 1) * 5),
       currPage: page,
-      nextPage: page === 50 ? 0 : page + 1,
+      nextPage: page === 10 ? 0 : page + 1,
       prevPage: page - 1,
     });
   });

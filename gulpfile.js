@@ -43,7 +43,7 @@ gulp.task('build-client-js', function () {
   pipe(gulp.dest('static/dist/js/'));
 });
 
-gulp.task('build-css', ['copy-img'], function () {
+gulp.task('build-css', function () {
   return gulp.src('static/src/scss/**/main.scss').
   pipe(compass({
     'config_file': 'static/src/compass-config.rb',
@@ -62,24 +62,23 @@ gulp.task('copy-img', function () {
   pipe(gulp.dest('static/dist/img'));
 });
 
-gulp.task('optimize-img', ['build-css'], function () {
-  if (process.env.NODE_ENV !== 'production') return;
-
+gulp.task('optimize-png', function () {
   var fileOptimization = transform(function () {
     return new OptiPng(['-o7']);
   });
 
-  return gulp.src('static/dist/img/**/*.png').
+  return gulp.src('static/src/img/**/*.png').
   pipe(fileOptimization).
-  pipe(gulp.dest('static/dist/img'));
+  pipe(gulp.dest('static/src/img'));
 });
 
 gulp.task('lint', ['lint-js']);
-gulp.task('build', ['build-client-js', 'build-css', 'optimize-img']);
+gulp.task('build', ['build-client-js', 'build-css', 'copy-img']);
 gulp.task('default', ['lint', 'build']);
 
 gulp.task('watch', function () {
   gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
+  gulp.watch('static/src/img/**/*.{png,svg,ico,jpg,gif}', ['copy-img']);
   gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
   gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
 });
