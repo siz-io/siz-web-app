@@ -30,6 +30,11 @@ app.get('/', function (req, res) {
   res.render('home');
 });
 
+// Factory
+app.get('/factory/edit', function (req, res) {
+  res.render('factory/edit');
+});
+
 // Trending page
 app.get('/trending', function (req, res) {
   var page = Math.min(Math.max(Math.floor(Number(req.query.page)), 0), 10) || 1;

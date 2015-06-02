@@ -1,0 +1,332 @@
+@import "lib/reset";
+@import "lib/buttons";
+
+$dark-grey: #242527;
+
+body {
+  background-color: black;
+  text-align: center;
+  color: white;
+}
+
+.header {
+  position: relative;
+  top: 16px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 12px;
+  z-index: 10;
+  text-transform: uppercase;
+  span, img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    height: 28px;
+  }
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+.top-bg {
+  z-index: 1;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 420px;
+  padding-bottom: 17.36%;
+
+  .fill {
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    -webkit-transform: rotate(6.5deg);
+    transform: rotate(6.5deg);
+    -webkit-transform-origin: right bottom;
+    transform-origin: right bottom;
+    background-color: $dark-grey;
+    background-image: url("/static/img/scissors-bg.png");
+    background-size: 180px;
+    box-shadow: 20px 20px 20px 0 rgba(0, 0, 0, 0.11);
+  }
+}
+
+.editor, .editor-bg {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 520px;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.editor-bg {
+  border-radius: 2px;
+  background: linear-gradient(black, rgba(255, 255, 255, 0.05));
+  background-color: $dark-grey;
+}
+
+.editor {
+  z-index: 10;
+}
+
+.preview {
+  left: 10px;
+  position: absolute;
+  iframe {
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  width: 335px;
+  height: 189px;
+}
+
+.gifs {
+  position: absolute;
+  right: 10px;
+  width: 335px;
+  height: 188px;
+}
+
+.gif {
+  pointer-events: none;
+  position: absolute;
+  width: 168px;
+  height: 94px;
+  .btn {
+    background-color: darken($color-neutral, 20%);
+    box-shadow: none;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 94px;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.gif1 {
+  top: 0;
+  left: 0;
+}
+
+.gif2 {
+  top: 0;
+  right: 0;
+}
+
+.gif3 {
+  bottom: 0;
+  left: 0;
+}
+
+.gif4 {
+  bottom: 0;
+  right: 0;
+}
+
+.create-btn {
+  position: absolute;
+  bottom: -46px;
+  left: 0;
+  line-height: 36px;
+  width: 100%;
+}
+
+.gif-selectors {
+  position: absolute;
+  bottom: -45px;
+  width: 100%;
+  left: 0;
+}
+
+.gif-selector {
+  font-size: 24px;
+  position: absolute;
+  bottom: 0;
+  line-height: 36px;
+  width: 83px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  img {
+    height: 20px;
+    padding-right: 5px;
+  }
+
+  img, span {
+    transition: margin-left 0.4s;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.valid {
+    img {
+      margin-left: -67px;
+    }
+    span {
+      margin-left: 35px;
+    }
+  }
+
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.gif-selector1 {
+  left: 0;
+}
+.gif-selector2 {
+  left: 84px;
+}
+.gif-selector3 {
+  right: 84px;
+}
+.gif-selector4 {
+  right: 0;
+}
+
+.scissors-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 60px;
+  width: 180px;
+  height: 180px;
+  font-size: 48px;
+  img {
+    height: 48px;
+  }
+  span, img {
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.gif-preview {
+  background-color: black;
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 320px;
+  height: 180px;
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.tutorial {
+  text-align: left;
+  color: lighten($dark-grey, 32%);
+  font-size: 12px;
+  vertical-align: middle;
+  display: inline-block;
+
+  p {
+    margin-bottom: 12px;
+  }
+}
+
+.timeline {
+  border-radius: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.09));
+  background-color: $dark-grey;
+  box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.09) inset;
+}
+
+.pointy-cursor {
+  position: absolute;
+  height: 10px;
+  width: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -10px;
+}
+
+.track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 629px;
+  height: 30px;
+  border-radius: 2px;
+  background: linear-gradient(0, rgba(255,255,255,0.3), rgba(0,0,0,0)),
+   repeating-linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 8px, rgba(0,0,0,0.5) 9px);
+  background-size: 9px 100%;
+  background-color: $color-neutral;
+  box-shadow: 0 0 0 1px transparentize($color-neutral, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.cursor1, .cursor2 {
+  cursor: pointer;
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 11px;
+  background: linear-gradient(0, rgba(255,255,255,0.3), rgba(0,0,0,0));
+  background-color: $color-active;
+  box-shadow: 0 0 0 1px transparentize($color-active, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 5px;
+    height: 10px;
+    margin: auto;
+  }
+}
+
+.cursor1 {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.cursor2 {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.selected {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  background: linear-gradient(0, rgba(255,255,255,0.3), rgba(0,0,0,0));
+  background-color: transparentize($color-active, 0.2);
+  box-shadow: 0 0 0 1px transparentize($color-active, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+}
