@@ -10,7 +10,7 @@ if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i
 }
 
 // Android alert
-var ANDROID_CTA = 'We are searching for Beta Testers for our amazing Android app. Would you like to be part of it?';
+var ANDROID_CTA = 'We have an awesome app designed for mobile. It looks a trillion times better!!! Do you want to download it?';
 if (navigator.userAgent.match(/Android/i) && window.confirm(ANDROID_CTA)) {
-  window.location.href = 'http://siz-app.launchrock.com/';
+  window.location.href = 'http://ad.apps.fm/oDwkHjcrWLrNoLmnN1Lwel5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xWvE6TgaBCrtTMbUCm43ptTQQFtvGmGm78YegHkNWCxf';
 }
