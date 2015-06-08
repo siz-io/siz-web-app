@@ -33,7 +33,7 @@ $color-valid: #2DD25F;
     linear-gradient(0, rgba(255,255,255,0.2), rgba(0,0,0,0));
   background-size: 300% 300%;
   background-position: center center;
-  transition: background-position 0.5s, background-color 0.5s;
+  transition: background-position 0.5s, background-color 0.2s;
 
   &:hover {
     background-position: 100% 100%;

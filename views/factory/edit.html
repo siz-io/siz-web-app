@@ -30,69 +30,18 @@
     <span>factory</span>
   </div>
   <div class="editor-bg"></div>
-  <div class="editor">
-    <div class="preview">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/LWOYM9R7QGE?autoplay=0&autohide=1&controls=1&enablejsapi=1&iv_load_policy=3" frameborder="0" allowfullscreen></iframe>
-      <div class="gif-selectors">
-        <a href="#" class="btn gif-selector gif-selector1 valid"><img src="/static/img/scissors.png"/><span>1</span></a>
-        <a href="#" class="btn gif-selector gif-selector2 valid"><img src="/static/img/scissors.png"/><span>2</span></a>
-        <a href="#" class="btn gif-selector gif-selector3 active"><img src="/static/img/scissors.png"/><span>3</span></a>
-        <a href="#" class="btn gif-selector gif-selector4"><img src="/static/img/scissors.png"/><span>4</span></a>
-      </div>
-    </div>
-    <div class="gifs">
-      <div class="gif gif1">
-        <a class="btn" href="#">1</a>
-      </div>
-      <div class="gif gif2">
-        <a class="btn" href="#">2</a>
-      </div>
-      <div class="gif gif3">
-        <a class="btn" href="#">3</a>
-      </div>
-      <div class="gif gif4">
-        <a class="btn" href="#">4</a>
-      </div>
-      <a href="#" class="btn valid create-btn">Create strip</a>
-    </div>
-    <div class="scissors-indicator">
-      <img src="/static/img/scissors.png">
-      <span>3</span>
-    </div>
-    <div class="gif-preview">
-      <div class="tutorial">
-        <p>1. Navigate in the video</p>
-        <p>2. Click on a number to capture a highlight</p>
-        <p>3. Adjust it with the tool below</p>
-      </div>
-    </div>
-    <div class="timeline">
-      <svg class="pointy-cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10" preserveAspectRatio="none">
-        <polygon points="10 0 20 10 0 10" fill="#222"/>
-      </svg>
-      <div class="track">
-        <div class="cursor1" style="left:17px">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 10" preserveAspectRatio="none">
-            <polygon points="5 0 0 5 5 10" fill="#fff"/>
-          </svg>
-        </div>
-        <div class="selected" style="left:29px;right:568px"></div>
-        <div class="cursor2" style="left:62px">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 10" preserveAspectRatio="none">
-            <polygon points="0 0 5 5 0 10" fill="#fff"/>
-          </svg>
-        </div>
-      </div>
+
+  <div id="react-editor-mount-point"></div>
+
+  <div class="footer">
+    <div class="menu menu-bottom">
+      <a href="/trending">Trending</a>
+      <a href="mailto:jobs@siz.io" target="_blank">Jobs</a>
+      <a href="mailto:hello@siz.io" target="_blank">Contact</a>
+      <span>© SIZ 2015</span>
     </div>
   </div>
 
-<!--
-   <div class="menu menu-bottom">
-    <a href="/trending">Trending</a>
-    <a href="mailto:jobs@siz.io" target="_blank">Jobs</a>
-    <a href="mailto:hello@siz.io" target="_blank">Contact</a>
-    <span>© SIZ 2015</span>
-  </div>
--->
+  <script src="/static/js/factory/edit/main.js"></script>
 </body>
 </html>

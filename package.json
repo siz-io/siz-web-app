@@ -6,20 +6,25 @@
   "dependencies": {
     "consolidate": "^0.11.0",
     "express": "^4.12.2",
+    "fs-extra": "^0.18.4",
     "hogan.js": "^3.0.2",
-    "mkdirp": "^0.5.0",
     "request": "^2.53.0",
     "serve-favicon": "^2.2.0"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
+    "browserify-incremental": "^3.0.0",
     "duplexer": "^0.1.1",
+    "flux": "^2.0.3",
     "gulp": "^3.8.11",
     "gulp-compass": "^2.0.4",
     "gulp-jshint": "^1.9.2",
+    "immutable": "^3.7.3",
     "jshint": "^2.6.3",
     "jshint-stylish": "^1.0.1",
     "optipng": "^0.1.1",
+    "react": "^0.13.3",
+    "react-slider": "^0.4.2",
+    "reactify": "^1.1.1",
     "stream-browserify": "^1.0.0",
     "uglify-js": "^2.4.19",
     "vinyl-map": "^1.0.1",
@@ -39,5 +44,6 @@
   "bugs": {
     "url": "https://github.com/siz-io/siz-web-app/issues"
   },
-  "homepage": "https://github.com/siz-io/siz-web-app"
+  "homepage": "https://github.com/siz-io/siz-web-app",
+  "private": true
 }

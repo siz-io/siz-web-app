@@ -1,17 +1,18 @@
 @import "lib/reset";
 @import "lib/buttons";
 @import "lib/button-icons.scss";
+@import "lib/bottom-menu";
 
 body {
   text-align: center;
 }
 
-.menu a, .menu span {
-  font-size: 12px;
-  display: inline-block;
-}
-
 .menu-top {
+  a, span {
+    font-size: 12px;
+    display: inline-block;
+  }
+
   padding-bottom: 20px;
   a {
     color: #fff;
@@ -126,33 +127,6 @@ body {
     height: 100%;
   }
   margin-bottom: 20px;
-}
-
-.oblique-bottom-wrapper {
-  height: 60px;
-  overflow: hidden;
-}
-
-.oblique-bottom {
-  min-width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: -1000px;
-  right: -1000px;
-  margin: 0 auto;
-  height: 60px;
-  width: 1920px;
-  background-color: #ebebeb;
-}
-
-.menu-bottom {
-  padding-top: 15px;
-  background-color: #ebebeb;
-  color: #8f8f8f;
-  a, span {
-    color: #8f8f8f;
-    padding: 15px;
-  }
 }
 
 .official-pages {

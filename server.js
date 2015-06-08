@@ -1,8 +1,7 @@
 var express = require('express');
 var app = express();
 var cons = require('consolidate');
-var fs = require('fs');
-var mkdirp = require('mkdirp');
+var fs = require('fs-extra');
 var favicon = require('serve-favicon');
 
 // API
@@ -105,8 +104,7 @@ function getToken(cb) {
       if (err) return cb(err);
       if (res.statusCode >= 400) return cb(new Error('Token creation failed : HTTP error ' + res.statusCode));
       apiToken = body.tokens.id;
-      mkdirp.sync(__dirname + '/tmp');
-      fs.writeFileSync(__dirname + '/tmp/token', apiToken);
+      fs.outputFileSync(__dirname + '/tmp/token', apiToken);
       cb(null, apiToken);
     });
   }

@@ -3,11 +3,14 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var map = require('vinyl-map');
 var transform = require('vinyl-transform');
-var browserify = require('browserify');
+var browserify = require('browserify-incremental');
+var reactify = require('reactify');
 var UglifyJS = require('uglify-js');
 var OptiPng = require('optipng');
 var compass = require('gulp-compass');
 var duplex = require('duplexer');
+var path = require('path');
+var fs = require('fs-extra');
 
 function noopStream() {
   return map(function (fileContentBuffer) {
@@ -24,7 +27,10 @@ gulp.task('lint-js', function () {
 
 gulp.task('build-client-js', function () {
   var fileBrowserification = transform(function (filename) {
-    return duplex(noopStream(), browserify(filename).bundle());
+    fs.ensureFileSync('.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json'));
+    return duplex(noopStream(), browserify(filename, {
+      cacheFile: '.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json')
+    }).transform(reactify).bundle());
   });
 
   var fileMinification = map(function (fileContentBuffer) {
@@ -81,5 +87,6 @@ gulp.task('default', ['lint', 'build']);
 gulp.task('watch', function () {
   gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
   gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
+  gulp.watch('static/src/js/**/*.jsx', ['build-client-js']);
   gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
 });
