@@ -101,11 +101,12 @@ body {
 }
 
 .gif {
-  pointer-events: none;
   position: absolute;
   width: 168px;
   height: 94px;
   .btn {
+    pointer-events: none;
+    display: block;
     background-color: darken($color-neutral, 20%);
     box-shadow: none;
     font-size: 48px;
@@ -114,6 +115,9 @@ body {
     border-radius: 0;
     height: 100%;
     width: 100%;
+    &.active {
+      background-color: mix(darken($color-active, 20%), darken($color-neutral, 20%));
+    }
   }
 }
 
@@ -293,4 +297,24 @@ body {
   left: 0;
   right: 0;
   margin: auto;
+}
+
+.gif-hover-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.gif, .gif-preview {
+  video {
+    pointer-events: none;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
 }

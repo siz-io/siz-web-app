@@ -1,6 +1,5 @@
-var React = require('react/addons');
+var React = require('react');
 var PureRenderMixin = React.addons.PureRenderMixin;
-var I = require('immutable');
 var store = require('./store');
 var dispatcher = require('./dispatcher');
 var actions = require('./actions');
@@ -11,34 +10,31 @@ module.exports = React.createClass({
 
   getInitialState: function () {
     return {
-      data: I.fromJS({
-        gifs: [{
-          status: 'pending'
-        }, {
-          status: 'pending'
-        }, {
-          status: 'pending'
-        }, {
-          status: 'pending'
-        }],
-        gifIndicator: ''
-      })
+      data: store.state
     };
+  },
+
+  getGifSelectorClass: function (gif) {
+    if (gif.get('active')) return 'active';
+    else return '';
+  },
+
+  getGifIndicator: function (gifs) {
+    return [1, 2, 3, 4][gifs.findIndex(function (gif) {
+      return gif.get('active');
+    })];
+  },
+
+  getLockPreview: function (gifs) {
+    return gifs.reduce(function (lockPreview, gif) {
+      return lockPreview || gif.get('playing');
+    }, false);
   },
 
   componentDidMount: function () {
     store.on('change', function () {
-      var storeState = store.state;
-      var activeGifIdx = storeState.get('activeGifIdx');
-      this.setState(function (state) {
-        return {
-          data: state.data
-            .set('gifIndicator', [1, 2, 3, 4][activeGifIdx])
-            .set('gifs', storeState.get('gifs').map(function (gif) {
-              return gif.set('status', gif.get('start', false) ? 'valid' : 'pending');
-            }))
-            .setIn(['gifs', activeGifIdx, 'status'], 'active')
-        };
+      this.setState({
+        data: store.state
       });
     }.bind(this));
   },
@@ -60,6 +56,22 @@ module.exports = React.createClass({
 
   onTimelineChange: function (value) {
     console.log('onTimelineChange: ', value);
+  },
+
+  onMouseEnterGif: function (gifIdx) {
+    dispatcher.dispatch({
+      type: actions.SET_PLAYBACK_FOR_GIF_IN_STRIP,
+      index: gifIdx,
+      command: 'PLAY'
+    });
+  },
+
+  onMouseLeaveGif: function (gifIdx) {
+    dispatcher.dispatch({
+      type: actions.SET_PLAYBACK_FOR_GIF_IN_STRIP,
+      index: gifIdx,
+      command: 'STOP'
+    });
   },
 
   render: require('./editor.jsx')
