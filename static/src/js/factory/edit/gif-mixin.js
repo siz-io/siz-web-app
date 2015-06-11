@@ -1,18 +1,18 @@
 var React = require('react');
-var PureRenderMixin = React.addons.PureRenderMixin;
 var clockStore = require('./clock-store');
 
 var FRAME_RATE = 8;
 var FRAME_DELAY = 1000 / FRAME_RATE;
 
-// All durations are in milliseconds (except HTML <video> tag's currentTime)
 
-module.exports = React.createClass({
+// Common behaviour for Gif components
+// All durations are in milliseconds
+
+module.exports = {
   displayName: 'Gif',
-  mixins: [PureRenderMixin],
 
   propTypes: {
-    videoUrl: React.PropTypes.string.isRequired,
+    video: React.PropTypes.string.isRequired,
     startMs: React.PropTypes.number.isRequired,
     endMs: React.PropTypes.number.isRequired,
     playing: React.PropTypes.bool.isRequired
@@ -31,12 +31,8 @@ module.exports = React.createClass({
     }
   },
 
-  getCurrentMs: function () {
-    return this.refs.video.getDOMNode().currentTime * 1000;
-  },
-
   seekToMs: function (milliseconds) {
-    this.refs.video.getDOMNode().currentTime = milliseconds / 1000.0;
+    this.setCurrentMs(milliseconds);
     this._lastSyncMs = Date.now();
   },
 
@@ -51,9 +47,8 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function () {
+    if (typeof (this.setupPlayer) === 'function') this.setupPlayer();
     if (this.props.playing) this.addClockListener();
     this.seekToMs(this.props.startMs);
-  },
-
-  render: require('./gif.jsx')
-});
+  }
+};

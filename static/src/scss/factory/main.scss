@@ -308,7 +308,7 @@ body {
 }
 
 .gif, .gif-preview {
-  video {
+  video, .youtube-wrapper, iframe {
     pointer-events: none;
     display: block;
     position: absolute;

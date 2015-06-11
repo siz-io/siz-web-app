@@ -4,7 +4,7 @@ module.exports = function () {
 
   return (
     <video ref="video" muted>
-      <source src={this.props.videoUrl} type="video/mp4"/>
+      <source src={this.props.video} type="video/mp4"/>
     </video>
   )
 };

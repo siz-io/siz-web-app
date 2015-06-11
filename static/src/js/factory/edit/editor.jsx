@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactSlider = require('./react-slider-patched');
-var Gif = require('./gif');
-
+var Gif = require('./gif-youtube');
+// https://s3-eu-west-1.amazonaws.com/siz-dev/KEYBOARD+CAT+96+TEARS+(144p).mp4
 module.exports = function () {
 
   var s = this.state.data;
@@ -22,13 +22,13 @@ module.exports = function () {
         <div className="gif gif1">
           <a className={'btn ' + this.getGifSelectorClass(gifs.get(0))} href="#">1</a>
           <div className="gif-hover-container" onMouseEnter={this.onMouseEnterGif.bind(this, 0)} onMouseLeave={this.onMouseLeaveGif.bind(this, 0)}>
-            <Gif startMs={500} endMs={4500} playing={gifs.get(0).get('playing')} videoUrl="https://s3-eu-west-1.amazonaws.com/siz-dev/KEYBOARD+CAT+96+TEARS+(144p).mp4"/>
+            <Gif startMs={500} endMs={4500} playing={gifs.get(0).get('playing')} video="LWOYM9R7QGE"/>
           </div>
         </div>
         <div className="gif gif2">
           <a className={'btn ' + this.getGifSelectorClass(gifs.get(1))} href="#">2</a>
           <div className="gif-hover-container" onMouseEnter={this.onMouseEnterGif.bind(this, 1)} onMouseLeave={this.onMouseLeaveGif.bind(this, 1)}>
-            <Gif startMs={500} endMs={4500} playing={gifs.get(1).get('playing')} videoUrl="https://s3-eu-west-1.amazonaws.com/siz-dev/KEYBOARD+CAT+96+TEARS+(144p).mp4"/>
+            <Gif startMs={500} endMs={4500} playing={gifs.get(1).get('playing')} video="LWOYM9R7QGE"/>
           </div>
         </div>
         <div className="gif gif3">
@@ -49,7 +49,7 @@ module.exports = function () {
           <p>2. Click on a number to capture a highlight</p>
           <p>3. Adjust it with the tool below</p>
         </div>
-        <Gif startMs={500} endMs={4500} playing={!this.getLockPreview(gifs)} videoUrl="https://s3-eu-west-1.amazonaws.com/siz-dev/KEYBOARD+CAT+96+TEARS+(144p).mp4"/>
+        <Gif startMs={500} endMs={4500} playing={!this.getLockPreview(gifs)} video="LWOYM9R7QGE"/>
       </div>
       <div className="timeline">
         <svg className="pointy-cursor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10" preserveAspectRatio="none">

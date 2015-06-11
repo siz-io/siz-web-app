@@ -28,7 +28,8 @@
     "stream-browserify": "^1.0.0",
     "uglify-js": "^2.4.19",
     "vinyl-map": "^1.0.1",
-    "vinyl-transform": "^1.0.0"
+    "vinyl-transform": "^1.0.0",
+    "youtube-wrapper": "^1.0.1"
   },
   "scripts": {
     "start": "node server.js",
