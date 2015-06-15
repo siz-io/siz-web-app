@@ -13,7 +13,7 @@ body {
 
 .header {
   position: relative;
-  top: 16px;
+  top: 20px;
   letter-spacing: 2px;
   font-weight: 700;
   font-size: 12px;
@@ -62,7 +62,7 @@ body {
 
 .editor, .editor-bg {
   position: absolute;
-  top: 60px;
+  top: 40px;
   left: 0;
   right: 0;
   height: 520px;
@@ -83,12 +83,6 @@ body {
 .preview {
   left: 10px;
   position: absolute;
-  iframe {
-    overflow: hidden;
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
   width: 335px;
   height: 189px;
 }
@@ -300,6 +294,7 @@ body {
 }
 
 .gif-hover-container {
+  cursor: pointer;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -307,14 +302,20 @@ body {
   left: 0;
 }
 
-.gif, .gif-preview {
+.gif, .gif-preview, .preview {
   video, .youtube-wrapper, iframe {
-    pointer-events: none;
+    overflow: hidden;
     display: block;
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
+  }
+}
+
+.gif, .gif-preview, {
+  video, iframe {
+    pointer-events: none;
   }
 }

@@ -10,7 +10,7 @@ module.exports = React.createClass({
   },
 
   setCurrentMs: function (milliseconds) {
-    this.refs.video.getDOMNode().currentTime = milliseconds / 1000.0;
+    this.refs.video.getDOMNode().currentTime = milliseconds / 1000;
   },
 
   render: require('./gif-video.jsx')

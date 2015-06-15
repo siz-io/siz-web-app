@@ -1,9 +1,6 @@
 var React = require('react');
 var clockStore = require('./clock-store');
-
-var FRAME_RATE = 8;
-var FRAME_DELAY = 1000 / FRAME_RATE;
-
+var c = require('./constants');
 
 // Common behaviour for Gif components
 // All durations are in milliseconds
@@ -27,8 +24,8 @@ module.exports = {
     if (nextProps.playing !== this.props.playing) {
       if (nextProps.playing) this.addClockListener();
       else clockStore.removeListener('change', this.sync);
-      this.seekToMs(nextProps.startMs);
     }
+    if (!nextProps.playing) this.seekToMs(nextProps.startMs);
   },
 
   seekToMs: function (milliseconds) {
@@ -40,9 +37,9 @@ module.exports = {
     var p = this.props;
     if (!p.playing) return this.seekToMs(p.startMs);
     var nowMs = Date.now();
-    if (nowMs - this._lastSyncMs >= FRAME_DELAY) {
-      var newCurrentMs = this.getCurrentMs() + FRAME_DELAY;
-      this.seekToMs((newCurrentMs <= p.endMs) ? newCurrentMs : p.startMs);
+    if (nowMs - this._lastSyncMs >= c.FRAME_DELAY) {
+      var newCurrentMs = this.getCurrentMs() + c.FRAME_DELAY;
+      this.seekToMs(((newCurrentMs >= p.startMs) && (newCurrentMs <= p.endMs)) ? newCurrentMs : p.startMs);
     }
   },
 

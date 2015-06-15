@@ -11,11 +11,11 @@ module.exports = React.createClass({
   },
 
   setCurrentMs: function (milliseconds) {
-    this.player.seekTo(Math.min(milliseconds / 1000.0, this.player.getDuration() || Infinity), true);
+    this.player.seekTo(Math.min(milliseconds / 1000, this.player.getDuration() || Infinity), true);
   },
 
   setupPlayer: function () {
-    var player = this.player = window.player = new Player(this.refs.video.getDOMNode(), {
+    var player = this.player = new Player(this.getDOMNode(), {
       videoId: this.props.video,
       playerVars: {
         'rel': 0,
@@ -33,16 +33,11 @@ module.exports = React.createClass({
     player.on('onStateChange', function (e) {
       if (e.data === 1) player.pauseVideo();
     });
+    player.setPlaybackQuality('small');
     player.mute();
   },
 
-  shouldComponentUpdate: function (nextProps) {
-    if (this.props.video !== nextProps.video) {
-      this.player.loadVideoById(nextProps.video);
-      this.seekToMs(nextProps.startMs);
-    }
-    return false; // Let YouTube manipulate the DOM
-  },
-
-  render: require('./gif-youtube.jsx')
+  render: function () {
+    return React.createElement('div');
+  }
 });

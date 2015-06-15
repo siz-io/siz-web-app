@@ -18,10 +18,17 @@
   background-size: 9px 100%;
   background-color: $color-neutral;
   box-shadow: 0 0 0 1px transparentize($color-neutral, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
 }
 
 .handle {
   cursor: pointer;
+  cursor: grab;
+  cursor: -webkit-grab;
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -38,6 +45,11 @@
     width: 5px;
     height: 10px;
     margin: auto;
+  }
+
+  &.active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
   }
 }
 

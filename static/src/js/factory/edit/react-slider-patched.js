@@ -363,7 +363,8 @@
       }
 
       this.setState({
-        value: value
+        value: value,
+        index: closestIndex
       }, callback.bind(this, closestIndex));
     },
 
