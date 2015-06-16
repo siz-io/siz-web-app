@@ -37,14 +37,17 @@ app.get('/get-the-app', function (req, res) {
     case 'Android':
       {
         res.redirect('http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK');
+        break;
       }
     case 'iOS':
       {
         res.redirect('http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8');
+        break;
       }
     default:
       {
         res.redirect('/');
+        break;
       }
   }
 });
