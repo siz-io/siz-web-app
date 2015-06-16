@@ -5,15 +5,21 @@
 
 $dark-grey: #242527;
 
+html {
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
+  min-width: 700px;
+  padding-bottom: 70px;
   background-color: black;
   text-align: center;
   color: white;
 }
 
 .header {
-  position: relative;
-  top: 20px;
+  padding-top: 20px;
   letter-spacing: 2px;
   font-weight: 700;
   font-size: 12px;
@@ -41,7 +47,6 @@ body {
   top: 0;
   width: 100%;
   height: 420px;
-  padding-bottom: 17.36%;
 
   .fill {
     width: 200%;
@@ -57,27 +62,43 @@ body {
     background-image: url("/static/img/scissors-bg.png");
     background-size: 180px;
     box-shadow: 20px 20px 20px 0 rgba(0, 0, 0, 0.11);
+    &:after {
+      content: "";
+      height: 100%;
+      width: 50%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(-51.5deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 43%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0) 50%,
+        rgba(0,0,0,0) 100%);
+    }
   }
 }
 
-.editor, .editor-bg {
-  position: absolute;
-  top: 40px;
-  left: 0;
-  right: 0;
-  height: 520px;
+.editor {
+  position: relative;
   width: 700px;
+  height: 520px;
   margin: 0 auto;
+  padding: 20px;
+  z-index: 10;
 }
 
 .editor-bg {
+  position: absolute;
+  width: 700px;
+  height: 520px;
+  margin: 0 auto;
+  top: 48px;
+  left: 0;
+  right: 0;
   border-radius: 2px;
   background: linear-gradient(black, rgba(255, 255, 255, 0.05));
   background-color: $dark-grey;
-}
-
-.editor {
-  z-index: 10;
 }
 
 .preview {
@@ -276,21 +297,29 @@ body {
   top: -10px;
 }
 
-.menu-bottom {
-  background-color: rgba(0, 0, 0, 0);;
-  padding: 0;
-  a, span {
-    padding-top: 0;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  &:before {
+    content: "";
+    background-color: $dark-grey;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    right: 0;
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+    -webkit-transform-origin: right top;
+    transform-origin: right top;
   }
 }
 
-.footer {
-  text-align: center;
-  position: absolute;
-  top: 640px;
-  left: 0;
-  right: 0;
-  margin: auto;
+.menu-bottom {
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 10px;
 }
 
 .gif-hover-container {
@@ -318,4 +347,73 @@ body {
   video, iframe {
     pointer-events: none;
   }
+}
+
+.create-your-strip {
+  opacity: 0.5;
+  display: inline-block;
+  color: #fff;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  .create {
+    img {
+      left: 0;
+      position: absolute;
+      height: 0.8em;
+    }
+    padding-left: 45px;
+    text-align: left;
+    font-size: 36px;
+    line-height: 0.8em;
+  }
+  .your-strip {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 0.8em;
+  }
+}
+
+form, .pitch, .create-your-strip {
+  z-index: 10;
+}
+
+input[type=text], input[type=password] {
+  width: 400px;
+  display: inline-block;
+  border: 2px solid $color-valid;
+  background-color: rgba(0,0,0,0);
+  border-radius: 2px;
+  color: $color-valid;
+  padding-left: 10px;
+  height: 40px;
+  margin-right: 5px;
+  &.half-size {
+    width: 200px;
+  }
+}
+
+input[type=submit] {
+  height: 38px;
+}
+
+.pitch {
+  margin-top: 50px;
+  font-size: 10px;
+  p {
+    opacity: 0.5;
+  }
+  a {
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+    line-height: 16px;
+  }
+}
+
+.error {
+  height: 0;
+  font-size: 12px;
+  color: lighten($color-main, 30%);
+  font-weight: 700;
+  line-height: 40px;
 }

@@ -30,6 +30,19 @@ app.get('/', function (req, res) {
 });
 
 // Factory
+// -------
+
+// login
+app.get('/factory/login', function (req, res) {
+  res.render('factory/login');
+});
+
+// source
+app.get('/factory/source', function (req, res) {
+  res.render('factory/source');
+});
+
+// edit
 app.get('/factory/edit', function (req, res) {
   res.render('factory/edit');
 });
