@@ -4,6 +4,7 @@ var cons = require('consolidate');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var favicon = require('serve-favicon');
+var useragent = require('useragent');
 
 // API
 var api = {
@@ -28,6 +29,24 @@ app.use('/static', express.static('static/dist'));
 // Home page
 app.get('/', function (req, res) {
   res.render('home');
+});
+
+// App download
+app.get('/get-the-app', function (req, res) {
+  switch (useragent.lookup(req.headers['user-agent']).os.family) {
+    case 'Android':
+      {
+        res.redirect('http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK');
+      }
+    case 'iOS':
+      {
+        res.redirect('http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8');
+      }
+    default:
+      {
+        res.redirect('/');
+      }
+  }
 });
 
 // Trending page
