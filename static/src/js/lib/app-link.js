@@ -1,5 +1,5 @@
 var IOS_LINK = 'http://ad.apps.fm/CL9wdn36rL36IlNMC7hjjvE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyplLn3FQ9Yn0PUtVvuWYZSMn-2sILGiWD4EUofgGxvuTfwmGoCp43dyUyi8sCzsPeK';
-var ANDROID_LINK = 'http://siz-app.launchrock.com/';
+var ANDROID_LINK = 'http://ad.apps.fm/3JEBgSb-nVONw2JrbT5PAF5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xYLBJ5iXe0m1F_rzsL9ndqDQQFtvGmGm78YegHkNWCxf';
 
 var $all = function (selector) {
   return Array.prototype.slice.call(document.querySelectorAll(selector));

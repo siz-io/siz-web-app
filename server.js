@@ -3,6 +3,7 @@ var app = express();
 var cons = require('consolidate');
 var fs = require('fs-extra');
 var favicon = require('serve-favicon');
+var useragent = require('useragent');
 
 // API
 var api = {
@@ -32,35 +33,58 @@ app.get('/', function (req, res) {
 // Factory
 // -------
 
-// login
+// Login
 app.get('/factory/login', function (req, res) {
   res.render('factory/login');
 });
 
-// source
+// Source
 app.get('/factory/source', function (req, res) {
   res.render('factory/source');
 });
 
-// edit
+// Edit
 app.get('/factory/edit', function (req, res) {
   res.render('factory/edit');
 });
 
-// Trending page
+// -------
+
+// App download
+app.get('/get-the-app', function (req, res) {
+  switch (useragent.lookup(req.headers['user-agent']).os.family) {
+    case 'Android':
+      {
+        res.redirect('http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK');
+        break;
+      }
+    case 'iOS':
+      {
+        res.redirect('http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8');
+        break;
+      }
+    default:
+      {
+        res.redirect('/');
+        break;
+      }
+  }
+});
+
+// Trending strips
 app.get('/trending', function (req, res) {
   var page = Math.min(Math.max(Math.floor(Number(req.query.page)), 0), 10) || 1;
   api.request('/stories?limit=' + page * 5, function (err, apiRes, body) {
     res.render('trending', {
       stories: body.stories.slice((page - 1) * 5),
       currPage: page,
-      nextPage: page === 50 ? 0 : page + 1,
+      nextPage: page === 10 ? 0 : page + 1,
       prevPage: page - 1,
     });
   });
 });
 
-// Story
+// Strip
 app.get('/stories/:slug', function (req, res) {
   api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
     try {
@@ -77,7 +101,7 @@ app.get('/stories/:slug', function (req, res) {
   });
 });
 
-// Embedded Story
+// Embedded Strip
 app.get('/embed/:slug', function (req, res) {
   api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
     try {
