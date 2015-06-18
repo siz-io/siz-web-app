@@ -20,7 +20,7 @@ function noopStream() {
 
 gulp.task('lint-js', function () {
   return gulp.
-  src(['**/*.js', '!node_modules/**', '!static/dist/js/**']).
+  src(['**/*.js', '!node_modules/**', '!static/dist/**']).
   pipe(jshint()).
   pipe(jshint.reporter('jshint-stylish'));
 });
@@ -33,39 +33,61 @@ gulp.task('build-client-js', function () {
     }).transform(reactify).bundle());
   });
 
-  var fileMinification = map(function (fileContentBuffer) {
-    return UglifyJS.minify(fileContentBuffer.toString(), {
-      fromString: true
-    }).code;
-  });
-
   return gulp.src('static/src/js/**/main.js').
   pipe(fileBrowserification).
   on('error', function (error) {
     console.log('[ERROR] - JS build failed :', error.message);
     this.emit('end');
   }).
-  pipe(process.env.NODE_ENV === 'production' ? fileMinification : noopStream()).
-  pipe(gulp.dest('static/dist/js/'));
+  pipe(gulp.dest('static/dist/dev/js/'));
+});
+
+gulp.task('minify-client-js', ['build-client-js'], function () {
+  var fileMinification = map(function (fileContentBuffer) {
+    return UglifyJS.minify(fileContentBuffer.toString(), {
+      fromString: true
+    }).code;
+  });
+  return gulp.src('static/dist/dev/js/**/*.js').
+  pipe(fileMinification).
+  pipe(gulp.dest('static/dist/prod/js/'));
 });
 
 gulp.task('build-css', function () {
   return gulp.src('static/src/scss/**/main.scss').
   pipe(compass({
-    'config_file': 'static/src/compass-config.rb',
-    css: 'static/dist/css',
+    'config_file': 'static/src/compass-config-dev.rb',
+    css: 'static/dist/dev/css',
     sass: 'static/src/scss',
-    environment: process.env.NODE_ENV || 'development'
+    environment: 'development'
   })).
   on('error', function () {
     this.emit('end');
   }).
-  pipe(gulp.dest('static/dist/css'));
+  pipe(gulp.dest('static/dist/dev/css'));
+});
+
+gulp.task('build-css-prod', function () {
+  return gulp.src('static/src/scss/**/main.scss').
+  pipe(compass({
+    'config_file': 'static/src/compass-config-prod.rb',
+    css: 'static/dist/prod/css',
+    sass: 'static/src/scss',
+    environment: 'production'
+  })).
+  on('error', function () {
+    this.emit('end');
+  }).
+  pipe(gulp.dest('static/dist/prod/css'));
 });
 
 gulp.task('copy-img', function () {
   return gulp.src(['static/src/img/**/*.{png,svg,ico,jpg,gif}', '!static/src/img/sprite/**']).
-  pipe(gulp.dest('static/dist/img'));
+  pipe(gulp.dest('static/dist/dev/img'));
+});
+
+gulp.task('copy-img-prod', ['copy-img'], function () {
+  return gulp.src('static/dist/dev/img/**').pipe(gulp.dest('static/dist/prod/img'));
 });
 
 gulp.task('optimize-png', function () {
@@ -78,14 +100,17 @@ gulp.task('optimize-png', function () {
   pipe(gulp.dest('static/src/img'));
 });
 
-gulp.task('lint', ['lint-js']);
-gulp.task('build', ['build-client-js', 'build-css', 'copy-img']);
-gulp.task('default', ['lint', 'build']);
-
-gulp.task('watch', function () {
-  gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
-  gulp.watch('static/src/img/**/*.{png,svg,ico,jpg,gif}', ['copy-img']);
-  gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
-  gulp.watch('static/src/js/**/*.jsx', ['build-client-js']);
-  gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
-});
+if (process.env.NODE_ENV === 'production') {
+  gulp.task('default', ['minify-client-js', 'build-css', 'build-css-prod', 'copy-img-prod']);
+} else {
+  gulp.task('lint', ['lint-js']);
+  gulp.task('build', ['build-client-js', 'build-css', 'copy-img']);
+  gulp.task('default', ['lint', 'build']);
+  gulp.task('watch', function () {
+    gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
+    gulp.watch('static/src/img/**/*.{png,svg,ico,jpg,gif}', ['copy-img']);
+    gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
+    gulp.watch('static/src/js/**/*.jsx', ['build-client-js']);
+    gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
+  });
+}

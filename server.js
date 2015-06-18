@@ -20,10 +20,10 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 // Favicon
-app.use(favicon(__dirname + '/static/dist/img/favicon.ico'));
+app.use(favicon(__dirname + '/static/dist/dev/img/favicon.ico'));
 
 // Static files
-app.use('/static', express.static('static/dist'));
+app.use('/static', express.static((app.get('env') === 'production') ? 'static/dist/prod' : 'static/dist/dev'));
 
 // Home page
 app.get('/', function (req, res) {
@@ -129,6 +129,8 @@ app.use(function (req, res) {
 function getToken(cb) {
   var apiToken;
   try {
+    if (app.get('env') === 'production')
+      throw new Error('We should always request a new token on production launch');
     apiToken = fs.readFileSync(__dirname + '/tmp/token', {
       encoding: 'utf8'
     });
@@ -141,7 +143,8 @@ function getToken(cb) {
       if (err) return cb(err);
       if (res.statusCode >= 400) return cb(new Error('Token creation failed : HTTP error ' + res.statusCode));
       apiToken = body.tokens.id;
-      fs.outputFileSync(__dirname + '/tmp/token', apiToken);
+      if (app.get('env') === 'development')
+        fs.outputFileSync(__dirname + '/tmp/token', apiToken);
       cb(null, apiToken);
     });
   }

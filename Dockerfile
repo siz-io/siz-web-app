@@ -19,4 +19,4 @@ RUN npm install
 RUN npm run gulp --production
 
 EXPOSE 1515
-CMD npm start --production
+CMD npm start

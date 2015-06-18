@@ -1,5 +1,5 @@
-css_dir = "static/dist/css"
+css_dir = "static/dist/dev/css"
 sass_dir = "static/src/scss"
 images_dir = "static/src/img"
-generated_images_dir = "static/dist/img"
+generated_images_dir = "static/dist/dev/img"
 http_generated_images_path = "/static/img"

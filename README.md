@@ -24,15 +24,15 @@ vagrant destroy
 
 ## Commands
 
-All these commands run in `development` mode by default.
-Set `NODE_ENV` environment variable to `production` for production mode.
+All these commands are for development (there's no JS/CSS minification, for example).
+For production, there is only `npm run gulp --production`, which bundles everything for production.
 
 ### Start server
 ```bash
 npm start
 ```
 
-### Lint (check syntax)
+### Lint (i.e. check syntax)
 ```bash
 # JS
 npm run gulp lint-js
@@ -43,14 +43,22 @@ npm run gulp lint
 
 ### Build
 ```bash
-# Client js
+# Client JS
 npm run gulp build-client-js
 
-# All
+# CSS
+npm run gulp build-css
+
+# Copy images from src to dist
+npm run gulp copy-img
+
+# All of above
 npm run gulp build
 ```
 
 ### Lint + Build
 ```bash
 npm run gulp
+# or to do it automatically when files change :
+npm run gulp watch
 ```
