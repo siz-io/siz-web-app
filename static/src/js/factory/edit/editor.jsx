@@ -58,7 +58,15 @@ module.exports = function () {
             </div>
           }
         </div>
-        <a href="#" onClick={this.onClickCreateStrip} className="btn valid create-btn">Create strip</a>
+        <div ref="substripArea" className="substrip">
+          <div className="substrip-content">
+            <a href="#" onClick={this.onClickCreateStrip} className="btn valid create-btn">Create strip</a>
+            <form className="title-form">
+              <input type="text" placeholder="Strip title" ref="titleField"/>
+              <input type="submit" className="btn valid" value="OK"/>
+            </form>
+          </div>
+        </div>
       </div>
       <div className={'scissors-indicator ' + (this.getGifIndicator(gifs) ? '' : 'hidden')}>
         <img src="/static/img/scissors.png"/>

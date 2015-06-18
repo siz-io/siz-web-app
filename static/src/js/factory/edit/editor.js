@@ -79,9 +79,10 @@ module.exports = React.createClass({
 
   onClickCreateStrip: function (e) {
     e.preventDefault();
-    dispatcher.dispatch({
-      type: actions.CREATE_STRIP
-    });
+    this.refs.substripArea.getDOMNode().className += ' edit-title';
+    setTimeout(function () {
+      this.refs.titleField.getDOMNode().focus();
+    }.bind(this), 200);
   },
 
   onTimelineChange: function (value) {
