@@ -61,7 +61,7 @@ module.exports = function () {
         <div ref="substripArea" className="substrip">
           <div className="substrip-content">
             <a href="#" onClick={this.onClickCreateStrip} className="btn valid create-btn">Create strip</a>
-            <form className="title-form">
+            <form className="title-form" onSubmit={this.onTitleSubmit}>
               <input type="text" placeholder="Strip title" ref="titleField"/>
               <input type="submit" className="btn valid" value="OK"/>
             </form>

@@ -11,6 +11,7 @@ module.exports = React.createClass({
 
   propTypes: {
     video: React.PropTypes.string.isRequired,
+    onEditionComplete: React.PropTypes.func.isRequired
   },
 
   getInitialState: function () {
@@ -123,6 +124,13 @@ module.exports = React.createClass({
       type: actions.SET_ACTIVE_GIF,
       index: gifIdx,
     });
+  },
+
+  onTitleSubmit: function (e) {
+    e.preventDefault();
+    if (document.activeElement) document.activeElement.blur();
+    this.previewPlayer.pauseVideo();
+    this.props.onEditionComplete({});
   },
 
   render: require('./editor.jsx')

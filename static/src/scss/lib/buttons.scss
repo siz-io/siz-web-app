@@ -2,6 +2,8 @@ $color-neutral: #6C6C6C;
 $color-main: #f80000;
 $color-active: #5A00FE;
 $color-valid: #2DD25F;
+$color-facebook: #3b5998;
+$color-instagram: #125688;
 
 @mixin color-btn($color) {
   box-shadow: 0 0 0 1px transparentize($color, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
@@ -15,7 +17,6 @@ $color-valid: #2DD25F;
 }
 
 .btn {
-  line-height: 40px;
   display: inline-block;
   border-radius: 2px;
   text-decoration: none;
@@ -23,7 +24,6 @@ $color-valid: #2DD25F;
   font-weight: 700;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  padding: 0 13px;
   background: linear-gradient(-45deg,
     rgba(0,0,0,0) 0%,
     rgba(0,0,0,0) 42%,
@@ -53,5 +53,11 @@ $color-valid: #2DD25F;
   }
   &.valid {
     @include color-btn($color-valid);
+  }
+  &.facebook {
+    @include color-btn($color-facebook);
+  }
+  &.instagram {
+    @include color-btn($color-instagram);
   }
 }

@@ -2,6 +2,10 @@
 @import "lib/buttons";
 @import "slider";
 @import "lib/bottom-menu";
+@import "loader";
+$share-sprite-sprite-dimensions: true;
+@import "share-sprite/*.png";
+@include all-share-sprite-sprites;
 
 $dark-grey: #242527;
 
@@ -16,6 +20,22 @@ body {
   background-color: black;
   text-align: center;
   color: white;
+}
+
+*::selection {
+  background: $color-valid;
+}
+*::-moz-selection {
+  background: $color-valid;
+}
+
+#react-editor-mount-point {
+  z-index: 1;
+  transition: opacity 0.2s;
+  &.inactive {
+    pointer-events: none;
+    opacity: 0;
+  }
 }
 
 .header {
@@ -70,25 +90,31 @@ body {
       right: 0;
       bottom: 0;
       background: linear-gradient(-51.5deg,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) 43%,
-        rgba(0,0,0,0.2) 50%,
-        rgba(0,0,0,0) 50%,
-        rgba(0,0,0,0) 100%);
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 43%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0) 50%,
+      rgba(0,0,0,0) 100%);
     }
   }
 }
 
-.editor {
+.editor, #strip-creator {
   position: relative;
   width: 700px;
   height: 520px;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 20px;
   z-index: 10;
 }
 
 .editor-bg {
+  transition: height 0.2s;
+  transition-delay: 0s;
+  &.collapsed {
+    transition-delay: 0.1s;
+    height: 413px;
+  }
   position: absolute;
   width: 700px;
   height: 520px;
@@ -187,6 +213,7 @@ body {
 
 .create-btn {
   display: block;
+  line-height: 37px;
   top: 1px;
 }
 
@@ -210,7 +237,6 @@ body {
       right: 0;
       bottom: 1px;
       width: 45px;
-      padding: 0;
     }
   }
 }
@@ -445,6 +471,7 @@ input[type=text], input[type=password] {
 
 input[type=submit] {
   height: 38px;
+  padding: 0 10px;
 }
 
 .pitch {
@@ -467,4 +494,125 @@ input[type=submit] {
   color: lighten($color-main, 30%);
   font-weight: 700;
   line-height: 40px;
+}
+
+
+#strip-creator {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 48px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+
+  &.active {
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+.strip-placeholder {
+  width: 680px;
+  height: 383px;
+  margin: 0 auto;
+  background-color: black;
+  text-align: center;
+  color: $color-valid;
+  .stripping {
+    position: absolute;
+    bottom: 75px;
+    width: 100%;
+    display: block;
+  }
+
+  .progress-bar {
+    background-color: $color-valid;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    transition: width 40s;
+  }
+
+  &.active .progress-bar {
+    width: 100%
+  }
+}
+
+.strip-share {
+  &>div {
+    margin-top: 14px;
+  }
+  .label {
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 5px;
+  }
+  text-align: left;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-delay: 0.2s;
+  pointer-events: none;
+  font-size: 12px;
+  &.active {
+    pointer-events: all;
+    opacity: 1;
+  }
+  .link {
+    color: white;
+    text-decoration: underline;
+    &:visited, &:active, &:focus {
+      color: white;
+    }
+  }
+  a {
+    margin-right: 10px;
+    padding: 5px;
+    svg, span {
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  a.btn.main {
+    margin-right: 0;
+    float: right;
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+input.embed {
+  vertical-align: middle;
+  display: inline-block;
+  border-width: 1px;
+  height: 24px;
+  font-size: 12px;
+  font-family: courier;
+  border-radius: 2px;
+  padding: 5px;
+  width: 400px;
+}
+
+.social-actions {
+  -webkit-transform: scale(0.6);
+  transform: scale(0.6);
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  display: inline-block;
+  height: 27px;
+  a {
+    display: inline-block;
+  }
 }
