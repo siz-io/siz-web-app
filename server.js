@@ -4,6 +4,7 @@ var cons = require('consolidate');
 var fs = require('fs-extra');
 var favicon = require('serve-favicon');
 var useragent = require('useragent');
+var factory = require('./lib/factory');
 
 // API
 var api = {
@@ -30,25 +31,7 @@ app.get('/', function (req, res) {
   res.render('home');
 });
 
-// Factory
-// -------
-
-// Login
-app.get('/factory/login', function (req, res) {
-  res.render('factory/login');
-});
-
-// Source
-app.get('/factory/source', function (req, res) {
-  res.render('factory/source');
-});
-
-// Edit
-app.get('/factory/edit', function (req, res) {
-  res.render('factory/edit');
-});
-
-// -------
+app.use('/factory', factory);
 
 // App download
 app.get('/get-the-app', function (req, res) {

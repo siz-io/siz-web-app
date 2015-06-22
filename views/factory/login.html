@@ -8,7 +8,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/factory/main.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
 
   <!-- Google Analytics -->
   <script>
@@ -35,11 +35,11 @@
     <div class="your-strip">your strip</div>
   </div>
 
-  <form id="login-form">
-    <input class="half-size" autofocus type="text" placeholder="email">
-    <input class="half-size" type="password" placeholder="password">
+  <form method="post" action="classic-login" autocomplete="off">
+    <input name="email" class="half-size" autofocus type="text" placeholder="email">
+    <input name="password" class="half-size" type="password" placeholder="password">
     <input type="submit" class="btn valid" value="OK">
-    <br><div class="error"></div>
+    <br><div class="error">{{error}}</div>
   </form>
 
   <div class="pitch">
@@ -56,7 +56,5 @@
       <span>© SIZ 2015</span>
     </div>
   </div>
-
-  <script src="/static/js/factory/edit/main.js"></script>
 </body>
 </html>

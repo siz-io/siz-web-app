@@ -8,7 +8,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/factory/main.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet" type="text/css">
 
   <!-- Google Analytics -->
   <script>
@@ -35,8 +35,18 @@
     <div class="your-strip">your strip</div>
   </div>
 
-  <form id="login-form">
-    <input type="text" autofocus placeholder="YouTube URL">
+  <script>
+    window.onSubmitUrl = function () {
+      try {
+        window.location = 'edit?video=' + document.querySelector('#video-url').value.split('v=')[1].replace(/(#|&)$/, '');
+      } catch (e) {
+        document.querySelector('.error').innerHTML = 'Invalid YouTube URL';
+      }
+    }
+  </script>
+
+  <form autocomplete="off" method="get" onsubmit="window.onSubmitUrl(); return false;">
+    <input id="video-url" type="text" autofocus placeholder="YouTube URL">
     <input type="submit" class="btn valid" value="OK">
     <br><div class="error"></div>
   </form>
@@ -53,7 +63,5 @@
       <span>© SIZ 2015</span>
     </div>
   </div>
-
-  <script src="/static/js/factory/edit/main.js"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@ module.exports = React.createClass({
       videoId: this.props.video,
       playerVars: {
         'rel': 0,
-        'autoplay': 0,
+        'autoplay': 1,
         'autohide': 1,
         'controls': 1,
         'playsinline': 1,
