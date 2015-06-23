@@ -76,6 +76,7 @@ app.get('/stories/:slug', function (req, res) {
       story.shareUrl = req.protocol + '://' + req.headers.host + '/stories/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
+      res.locals.isIOS = (useragent.lookup(req.headers['user-agent']).os.family === 'iOS');
       res.render('story', story);
     } catch (err) {
       res.statusCode = apiRes.statusCode;
