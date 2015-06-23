@@ -76,8 +76,7 @@
     <a href="mailto:hello@siz.io" target="_blank">Contact</a>
     <span>© SIZ 2015</span>
   </div>
-
-  <iframe src="siz://stories/{{slug}}" style="display:none;width:1px;height:1px" scrolling="no"></iframe>
+  {{#isIOS}}<iframe src="siz://stories/{{slug}}" style="display:none;width:1px;height:1px" scrolling="no"></iframe>{{/isIOS}}
   <script src="/static/js/story/main.js"></script>
 </body>
 </html>
