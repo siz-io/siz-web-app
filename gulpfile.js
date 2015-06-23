@@ -4,7 +4,7 @@ var jshint = require('gulp-jshint');
 var map = require('vinyl-map');
 var transform = require('vinyl-transform');
 var browserify = require('browserify-incremental');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var UglifyJS = require('uglify-js');
 var OptiPng = require('optipng');
 var compass = require('gulp-compass');
@@ -30,7 +30,7 @@ gulp.task('build-client-js', function () {
     fs.ensureFileSync('.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json'));
     return duplex(noopStream(), browserify(filename, {
       cacheFile: '.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json')
-    }).transform(reactify).bundle());
+    }).transform(babelify).bundle());
   });
 
   return gulp.src('static/src/js/**/main.js').
