@@ -33,15 +33,24 @@ app.get('/', function (req, res) {
 
 // App download
 app.get('/get-the-app', function (req, res) {
+  var fromFb = (req.query.src === 'fb');
   switch (useragent.lookup(req.headers['user-agent']).os.family) {
     case 'Android':
       {
-        res.redirect('http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK');
+        res.redirect(
+          fromFb ?
+          'http://ad.apps.fm/tIHnlV9MJ7n7I396kv1kELL7POj-y_ZJZxxUgeNYK8M2lLagVwZ2vz-PCHjw5bq80bjulM_0aO9WzZjf61UPXQ' :
+          'http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK'
+        );
         break;
       }
     case 'iOS':
       {
-        res.redirect('http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8');
+        res.redirect(
+          fromFb ?
+          'http://ad.apps.fm/DSGVJuBGHDUZG3VntFfnzPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypLnfa-r5MdHdW9jqZpKNWhBRoTqVPU3WAv9GqJZFwDgc' :
+          'http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8'
+        );
         break;
       }
     default:
