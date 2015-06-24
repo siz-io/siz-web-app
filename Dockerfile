@@ -1,4 +1,4 @@
-FROM sizio/node-front
+FROM quay.io/sizio/node-front:node-front_v1.0.1
 
 MAINTAINER The Siz Team
 
