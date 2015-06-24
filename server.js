@@ -5,6 +5,7 @@ var fs = require('fs');
 var mkdirp = require('mkdirp');
 var favicon = require('serve-favicon');
 var useragent = require('useragent');
+var basicAuth = require('basic-auth');
 
 // API
 var api = {
@@ -22,6 +23,24 @@ app.set('views', __dirname + '/views');
 
 // Favicon
 app.use(favicon(__dirname + '/static/dist/dev/img/favicon.ico'));
+
+// Basic Auth for dev endpoints
+if (process.env.BASIC_AUTH) {
+  var credentials = process.env.BASIC_AUTH.split(':');
+  var login = credentials[0];
+  var pass = credentials[1];
+  if (login && pass) {
+    app.use(function (req, res, next) {
+      var authTry = basicAuth(req);
+      if (!authTry || authTry.name !== login || authTry.pass !== pass) {
+        res.setHeader('WWW-Authenticate', 'Basic realm="Restricted access"');
+        res.status(401).send('<h1 style="text-align:center">Access denied<br><br><img src="http://i.imgur.com/lWS77Gt.gif"></h1>');
+      } else {
+        next();
+      }
+    });
+  }
+}
 
 // Static files
 app.use('/static', express.static((app.get('env') === 'production') ? 'static/dist/prod' : 'static/dist/dev'));
