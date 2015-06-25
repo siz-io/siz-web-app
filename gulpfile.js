@@ -22,7 +22,7 @@ function noopStream() {
 
 gulp.task('lint-js', function () {
   return gulp.
-  src(['**/*.js', '!node_modules/**', '!static/dist/**', '!static/src/js/vendor-patched/**']).
+  src(['**/*.{js,jsx}', '!node_modules/**', '!static/dist/**', '!static/src/js/vendor-patched/**']).
   pipe(map(function (fileContentBuffer, filename) {
     var report = esLintFormatter(esLintEngine.executeOnFiles([filename]).results);
     if (report) console.log(report);

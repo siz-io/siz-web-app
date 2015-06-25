@@ -1,10 +1,10 @@
-var React = require('react');
+var React = require('react'); // eslint-disable-line no-unused-vars
 
 module.exports = function () {
 
   return (
-    <video ref="video" muted>
+    <video muted ref="video">
       <source src={this.props.video} type="video/mp4"/>
     </video>
-  )
+  );
 };
