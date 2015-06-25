@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var useragent = require('useragent');
 var factory = require('./lib/factory');
 var basicAuth = require('basic-auth');
+var path = require('path');
 
 // API
 var api = {
@@ -19,27 +20,24 @@ app.set('api', api);
 // Views
 app.engine('html', cons.hogan);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 
 // Favicon
-app.use(favicon(__dirname + '/static/dist/dev/img/favicon.ico'));
+app.use(favicon(path.join(__dirname, '/static/dist/dev/img/favicon.ico')));
 
 // Basic Auth for dev endpoints
 if (process.env.BASIC_AUTH) {
   var credentials = process.env.BASIC_AUTH.split(':');
   var login = credentials[0];
   var pass = credentials[1];
-  if (login && pass) {
+  if (login && pass)
     app.use(function (req, res, next) {
       var authTry = basicAuth(req);
       if (!authTry || authTry.name !== login || authTry.pass !== pass) {
         res.setHeader('WWW-Authenticate', 'Basic realm="Restricted access"');
         res.status(401).send('<h1 style="text-align:center">Access denied<br><br><img src="http://i.imgur.com/lWS77Gt.gif"></h1>');
-      } else {
-        next();
-      }
+      } else next();
     });
-  }
 }
 
 // Static files
@@ -83,21 +81,23 @@ app.get('/get-the-app', function (req, res) {
 });
 
 // Trending strips
-app.get('/trending', function (req, res) {
+app.get('/trending', function (req, res, next) {
   var page = Math.min(Math.max(Math.floor(Number(req.query.page)), 0), 10) || 1;
   api.request('/stories?limit=' + page * 5, function (err, apiRes, body) {
+    if (err) return next(err);
     res.render('trending', {
       stories: body.stories.slice((page - 1) * 5),
       currPage: page,
       nextPage: page === 10 ? 0 : page + 1,
-      prevPage: page - 1,
+      prevPage: page - 1
     });
   });
 });
 
 // Strip
-app.get('/stories/:slug', function (req, res) {
+app.get('/stories/:slug', function (req, res, next) {
   api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+    if (err) return next(err);
     try {
       var story = body.stories;
       if (!story) throw new Error();
@@ -106,16 +106,19 @@ app.get('/stories/:slug', function (req, res) {
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.locals.isIOS = (useragent.lookup(req.headers['user-agent']).os.family === 'iOS');
       res.render('story', story);
-    } catch (err) {
+    } catch (ignored) {
       res.statusCode = apiRes.statusCode;
-      res.render('error');
+      res.render('error', {
+        errMsg: 'Strip not found...'
+      });
     }
   });
 });
 
 // Embedded Strip
-app.get('/embed/:slug', function (req, res) {
+app.get('/embed/:slug', function (req, res, next) {
   api.request('/stories?slug=' + req.params.slug, function (err, apiRes, body) {
+    if (err) next(err);
     try {
       var story = body.stories;
       if (!story) throw new Error();
@@ -124,7 +127,7 @@ app.get('/embed/:slug', function (req, res) {
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.render('embed', story);
-    } catch (err) {
+    } catch (ignored) {
       res.statusCode = apiRes.statusCode;
       res.render('black', {
         message: 'Strip not found...'
@@ -133,8 +136,20 @@ app.get('/embed/:slug', function (req, res) {
   });
 });
 
+// Error handling :
+// Not found
 app.use(function (req, res) {
-  res.status(404).render('error');
+  res.status(404).render('error', {
+    errMsg: 'There\'s nothing here...'
+  });
+});
+
+// Server Error
+app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
+  console.log(err.stack || err);
+  res.status(500).render('error', {
+    errMsg: 'Oops... Something went wrong on our side.'
+  });
 });
 
 // API token retrieval
@@ -143,11 +158,11 @@ function getToken(cb) {
   try {
     if (app.get('env') === 'production')
       throw new Error('We should always request a new token on production launch');
-    apiToken = fs.readFileSync(__dirname + '/tmp/token', {
+    apiToken = fs.readFileSync(path.join(__dirname, '/tmp/token'), {
       encoding: 'utf8'
     });
     cb(null, apiToken);
-  } catch (err) {
+  } catch (ignored) {
     api.request.post({
       url: '/tokens',
       body: {}
@@ -156,7 +171,7 @@ function getToken(cb) {
       if (res.statusCode >= 400) return cb(new Error('Token creation failed : HTTP error ' + res.statusCode));
       apiToken = body.tokens.id;
       if (app.get('env') === 'development')
-        fs.outputFileSync(__dirname + '/tmp/token', apiToken);
+        fs.outputFileSync(path.join(__dirname, '/tmp/token'), apiToken);
       cb(null, apiToken);
     });
   }

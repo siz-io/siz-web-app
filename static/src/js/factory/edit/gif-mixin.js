@@ -21,10 +21,10 @@ module.exports = {
   },
 
   componentWillReceiveProps: function (nextProps) {
-    if (nextProps.playing !== this.props.playing) {
+    if (nextProps.playing !== this.props.playing)
       if (nextProps.playing) this.addClockListener();
       else clockStore.removeListener('change', this.sync);
-    }
+
     if (!nextProps.playing) this.seekToMs(nextProps.startMs);
   },
 

@@ -122,7 +122,7 @@ module.exports = React.createClass({
     this.previewPlayer.pauseVideo();
     dispatcher.dispatch({
       type: actions.SET_ACTIVE_GIF,
-      index: gifIdx,
+      index: gifIdx
     });
   },
 

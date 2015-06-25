@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 
-var jshint = require('gulp-jshint');
 var map = require('vinyl-map');
 var transform = require('vinyl-transform');
 var browserify = require('browserify-incremental');
@@ -11,6 +10,9 @@ var compass = require('gulp-compass');
 var duplex = require('duplexer');
 var path = require('path');
 var fs = require('fs-extra');
+var esLint = require('eslint');
+var esLintEngine = new esLint.CLIEngine();
+var esLintFormatter = esLintEngine.getFormatter();
 
 function noopStream() {
   return map(function (fileContentBuffer) {
@@ -20,16 +22,18 @@ function noopStream() {
 
 gulp.task('lint-js', function () {
   return gulp.
-  src(['**/*.js', '!node_modules/**', '!static/dist/**']).
-  pipe(jshint()).
-  pipe(jshint.reporter('jshint-stylish'));
+  src(['**/*.js', '!node_modules/**', '!static/dist/**', '!static/src/js/vendor-patched/**']).
+  pipe(map(function (fileContentBuffer, filename) {
+    var report = esLintFormatter(esLintEngine.executeOnFiles([filename]).results);
+    if (report) console.log(report);
+  }));
 });
 
 gulp.task('build-client-js', function () {
   var fileBrowserification = transform(function (filename) {
-    fs.ensureFileSync('.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json'));
+    fs.ensureFileSync('.browserify-cache/' + path.relative(path.join(__dirname, 'static/src/js'), filename + '.json'));
     return duplex(noopStream(), browserify(filename, {
-      cacheFile: '.browserify-cache/' + path.relative(__dirname + '/static/src/js', filename + '.json')
+      cacheFile: '.browserify-cache/' + path.relative(path.join(__dirname, 'static/src/js'), filename + '.json')
     }).transform(babelify).bundle());
   });
 
@@ -100,9 +104,9 @@ gulp.task('optimize-png', function () {
   pipe(gulp.dest('static/src/img'));
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production')
   gulp.task('default', ['minify-client-js', 'build-css', 'build-css-prod', 'copy-img-prod']);
-} else {
+else {
   gulp.task('lint', ['lint-js']);
   gulp.task('build', ['build-client-js', 'build-css', 'copy-img']);
   gulp.task('default', ['lint', 'build']);

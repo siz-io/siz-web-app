@@ -1,5 +1,3 @@
-/* jshint ignore:start */
-
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(['react'], factory);
@@ -776,5 +774,3 @@
 
   return ReactSlider;
 }));
-
-/* jshint ignore:end */

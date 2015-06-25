@@ -4,9 +4,7 @@ var player;
 var playerReady = false;
 
 function playVideo() {
-  if ($('#player-container').className === '' && playerReady) {
-    player.playVideo();
-  }
+  if ($('#player-container').className === '' && playerReady) player.playVideo();
 }
 
 function showPlayer(videoId) {
