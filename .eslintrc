@@ -1,28 +1,7 @@
 ecmaFeatures:
   jsx: true
 
-  #ES6 Features turn them on carefully : check Babel support first
-  arrowFunctions: false
-  binaryLiterals: false
-  blockBindings: false
-  classes: false
-  defaultParams: false
-  destructuring: false
-  forOf: false
-  generators: false
-  modules: false
-  objectLiteralComputedProperties: false
-  objectLiteralDuplicateProperties: false
-  objectLiteralShorthandMethods: false
-  objectLiteralShorthandProperties: false
-  octalLiterals: false
-  regexUFlag: false
-  regexYFlag: false
-  restParams: false
-  spread: false
-  templateStrings: false
-  unicodeCodePointEscapes: false
-
+parser: babel-eslint
 
 env:
   browser: true

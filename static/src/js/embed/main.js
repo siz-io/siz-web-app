@@ -1,8 +1,8 @@
-var isEmbed = true; // i.e. not used in /stories page
+var isEmbed; // i.e. not used in /stories page
 try {
   isEmbed = window.top.location.host !== window.location.host || window.top === window;
-} catch (ignored) {
-  // Do nothing
+} catch (e) {
+  isEmbed = true;
 }
 if (isEmbed) {
   document.querySelector('.powered-by').style.display = 'block';

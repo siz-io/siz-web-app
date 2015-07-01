@@ -30,6 +30,12 @@ module.exports = React.createClass({
     });
   },
 
+  canSubmitStrip: function (gifs) {
+    return !!gifs.find(function (gif) {
+      return gif.get('endMs') > 0;
+    });
+  },
+
   getGifIndicator: function (gifs) {
     return [1, 2, 3, 4][gifs.findIndex(function (gif) {
       return gif.get('active');
@@ -130,7 +136,25 @@ module.exports = React.createClass({
     e.preventDefault();
     if (document.activeElement) document.activeElement.blur();
     this.previewPlayer.pauseVideo();
-    this.props.onEditionComplete({});
+    var title = this.refs.titleField.getDOMNode().value;
+    if (title.length > 100) return window.alert('Title is too long : 100 characters max.'); // eslint-disable-line no-alert
+    this.props.onEditionComplete({
+      title: title,
+      boxes: store.state.get('gifs').filter(function (gif) {
+        return gif.get('endMs') > 0;
+      }).map(function (gif) {
+        return gif.mapKeys(function (key) {
+          return {
+            startMs: 'start',
+            endMs: 'stop'
+          }[key] || 'dropThisKey';
+        }).delete('dropThisKey');
+      }).toJS(),
+      source: {
+        type: 'youtube',
+        id: this.props.video
+      }
+    });
   },
 
   render: require('./editor.jsx')

@@ -6,7 +6,9 @@ var favicon = require('serve-favicon');
 var useragent = require('useragent');
 var factory = require('./lib/factory');
 var basicAuth = require('basic-auth');
+var cookieParser = require('cookie-parser');
 var path = require('path');
+var createHTTPErr = require('http-errors');
 
 // API
 var api = {
@@ -42,6 +44,9 @@ if (process.env.BASIC_AUTH) {
 
 // Static files
 app.use('/static', express.static((app.get('env') === 'production') ? 'static/dist/prod' : 'static/dist/dev'));
+
+// Cookie parsing
+app.use(cookieParser(process.env.COOKIE_SIGNING_SECRET || 'F4ts0 The Keyb04rd C4t'));
 
 // Home page
 app.get('/', function (req, res) {
@@ -100,17 +105,16 @@ app.get('/stories/:slug', function (req, res, next) {
     if (err) return next(err);
     try {
       var story = body.stories;
-      if (!story) throw new Error();
+      if (!story) throw createHTTPErr(404, req.url, {
+        clientMsg: 'Strip not found...'
+      });
       story.shareUrl = req.protocol + '://' + req.headers.host + '/stories/' + story.slug;
       story.encodedShareUrl = encodeURIComponent(story.shareUrl);
       story.JSON = JSON.stringify(story).replace(/\//g, '\\/');
       res.locals.isIOS = (useragent.lookup(req.headers['user-agent']).os.family === 'iOS');
       res.render('story', story);
-    } catch (ignored) {
-      res.statusCode = apiRes.statusCode;
-      res.render('error', {
-        errMsg: 'Strip not found...'
-      });
+    } catch (e) {
+      next(e);
     }
   });
 });
@@ -136,20 +140,25 @@ app.get('/embed/:slug', function (req, res, next) {
   });
 });
 
-// Error handling :
-// Not found
-app.use(function (req, res) {
-  res.status(404).render('error', {
-    errMsg: 'There\'s nothing here...'
-  });
+// Unknown url
+app.use(function (req) {
+  throw createHTTPErr(404, req.url);
 });
 
-// Server Error
+// Error handling
 app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
-  console.log(err.stack || err);
-  res.status(500).render('error', {
-    errMsg: 'Oops... Something went wrong on our side.'
-  });
+  // 4xx Errors
+  if (err.statusCode < 500) {
+    console.log(err.name, ':', err.message);
+    res.status(err.statusCode).render(err.view || 'error', {
+      errMsg: err.clientMsg || 'There\'s nothing here...'
+    });
+  } else { // 5xx Errors (don't log twice 502s)
+    if (err.statusCode !== 502) console.log(err.stack || err);
+    res.status(err.statusCode || 500).render('error', {
+      errMsg: err.clientMsg || 'Oops... Something went wrong on our side.'
+    });
+  }
 });
 
 // API token retrieval
