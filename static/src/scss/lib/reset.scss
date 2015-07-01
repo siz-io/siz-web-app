@@ -149,12 +149,17 @@ input, textarea, select, a {
   outline: none;
 }
 
-body {
+body, input {
   font-family: "Montserrat", sans-serif;
 }
 
 .hidden {
   display: none;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 a {
@@ -166,3 +171,6 @@ iframe {
   display: block;
 }
 
+input[type=submit] {
+  border:none;
+}

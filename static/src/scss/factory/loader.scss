@@ -1,0 +1,77 @@
+@import "compass/css3";
+
+@include keyframes(loader) {
+	0%, 10%, 100% {
+		width: 160px;
+		height: 90px;
+	}
+	65% {
+		width: 0px;
+		height: 0px;
+	}
+}
+@include keyframes(loaderBlock) {
+	0%, 30% {
+		@include transform(rotate(0));
+	}
+	55% {
+		background-color:transparent;
+    transform:scale(.5);
+	}
+	100% {
+		@include transform(rotate(180deg));
+
+	}
+}
+@include keyframes(loaderBlockInverse) {
+	0%, 30% {
+		@include transform(rotate(0));
+	}
+	55% {
+		background-color:transparent;
+    transform:scale(.5);
+	}
+	100% {
+		@include transform(rotate(180deg));
+	}
+}
+.strip-placeholder.active .strip-loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 84px;
+	height: 84px;
+	@include transform(translate(-50%, -50%) rotate(0deg) translate3d(0,0,0));
+	@include animation(loader 1.2s infinite ease-in-out);
+
+	span {
+		position: absolute;
+		display: block;
+		width: 78px;
+		height: 43px;
+    border-radius:3px;
+		background-color: $color-valid;
+    border:1px $color-valid solid;
+    box-sizing:border-box;
+		@include animation(loaderBlock 1.2s infinite ease-in-out both);
+
+		&:nth-child(1) {
+			top: 0;
+			left: 0;
+		}
+		&:nth-child(2) {
+			top: 0;
+			right: 0;
+			@include animation(loaderBlockInverse 1.2s infinite ease-in-out both);
+		}
+		&:nth-child(3) {
+			bottom: 0;
+			left: 0;
+			@include animation(loaderBlockInverse 1.2s infinite ease-in-out both);
+		}
+		&:nth-child(4) {
+			bottom: 0;
+			right: 0;
+		}
+	}
+}

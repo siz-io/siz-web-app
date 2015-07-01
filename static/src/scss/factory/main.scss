@@ -1,0 +1,618 @@
+@import "lib/reset";
+@import "lib/buttons";
+@import "slider";
+@import "lib/bottom-menu";
+@import "loader";
+$share-sprite-sprite-dimensions: true;
+@import "share-sprite/*.png";
+@include all-share-sprite-sprites;
+
+$dark-grey: #242527;
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-width: 700px;
+  padding-bottom: 70px;
+  background-color: black;
+  text-align: center;
+  color: white;
+}
+
+*::selection {
+  background: $color-valid;
+}
+*::-moz-selection {
+  background: $color-valid;
+}
+
+#react-editor-mount-point {
+  z-index: 1;
+  transition: opacity 0.2s;
+  &.inactive {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.header {
+  padding-top: 20px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 12px;
+  z-index: 10;
+  text-transform: uppercase;
+  span, img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    height: 28px;
+  }
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+.top-bg {
+  z-index: 1;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 420px;
+
+  .fill {
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    -webkit-transform: rotate(6.5deg);
+    transform: rotate(6.5deg);
+    -webkit-transform-origin: right bottom;
+    transform-origin: right bottom;
+    background-color: $dark-grey;
+    background-image: url("/static/img/scissors-bg.png");
+    background-size: 180px;
+    box-shadow: 20px 20px 20px 0 rgba(0, 0, 0, 0.11);
+    &:after {
+      content: "";
+      height: 100%;
+      width: 50%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(-51.5deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 43%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0) 50%,
+      rgba(0,0,0,0) 100%);
+    }
+  }
+}
+
+.editor, #strip-creator {
+  position: relative;
+  width: 700px;
+  height: 520px;
+  margin: 0 auto;
+  padding-top: 20px;
+  z-index: 10;
+}
+
+.editor-bg {
+  transition: height 0.2s;
+  transition-delay: 0s;
+  &.collapsed {
+    transition-delay: 0.1s;
+    height: 413px;
+  }
+  position: absolute;
+  width: 700px;
+  height: 520px;
+  margin: 0 auto;
+  top: 48px;
+  left: 0;
+  right: 0;
+  border-radius: 2px;
+  background: linear-gradient(black, rgba(255, 255, 255, 0.05));
+  background-color: $dark-grey;
+}
+
+.preview {
+  left: 10px;
+  position: absolute;
+  width: 335px;
+  height: 189px;
+}
+
+.gifs {
+  position: absolute;
+  right: 10px;
+  width: 335px;
+  height: 188px;
+}
+
+.gif {
+  position: absolute;
+  width: 168px;
+  height: 94px;
+  .btn {
+    pointer-events: none;
+    display: block;
+    background-color: darken($color-neutral, 20%);
+    box-shadow: none;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 94px;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+    &.active {
+      background-color: mix(darken($color-active, 20%), darken($color-neutral, 20%));
+    }
+  }
+}
+
+.gif1 {
+  top: 0;
+  left: 0;
+}
+
+.gif2 {
+  top: 0;
+  right: 0;
+}
+
+.gif3 {
+  bottom: 0;
+  left: 0;
+}
+
+.gif4 {
+  bottom: 0;
+  right: 0;
+}
+
+.substrip {
+  position: absolute;
+  bottom: -47px;
+  left: -1px;
+  right: -1px;
+  height: 39px;
+  overflow: hidden;
+
+  &.edit-title .substrip-content {
+    top: -39px;
+  }
+}
+
+.substrip-content {
+  transition: top 0.2s;
+  position: absolute;
+  top: 0;
+  left: 2px;
+  right: 2px;
+  height: 200%;
+}
+
+.create-btn, .title-form {
+  position: absolute;
+  height: 37px;
+  left: 0;
+  width: 100%;
+}
+
+.create-btn {
+  display: block;
+  line-height: 37px;
+  top: 1px;
+}
+
+.title-form {
+  bottom: 0;
+  input {
+    position: absolute;
+
+    &[type=text] {
+      height: 100%;
+      left: 1px;
+      width: 280px;
+      border-radius: 0;
+      border-left: none;
+      border-top: none;
+      border-right: none;
+    }
+
+    &[type=submit] {
+      height: 100%;
+      right: 0;
+      bottom: 1px;
+      width: 45px;
+    }
+  }
+}
+
+.gif-selectors {
+  position: absolute;
+  bottom: -45px;
+  width: 100%;
+  left: 0;
+}
+
+.gif-selector {
+  font-size: 24px;
+  position: absolute;
+  bottom: 0;
+  line-height: 36px;
+  width: 83px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  img {
+    height: 20px;
+    padding-right: 5px;
+  }
+
+  img, span {
+    transition: margin-left 0.4s;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.valid {
+    img {
+      margin-left: -67px;
+    }
+    span {
+      margin-left: 35px;
+    }
+  }
+
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.gif-selector1 {
+  left: 0;
+}
+.gif-selector2 {
+  left: 84px;
+}
+.gif-selector3 {
+  right: 84px;
+}
+.gif-selector4 {
+  right: 0;
+}
+
+.scissors-indicator {
+  position: absolute;
+  left: 5px;
+  bottom: 60px;
+  width: 180px;
+  height: 180px;
+  font-size: 48px;
+  img {
+    height: 48px;
+    margin-right: 10px;
+  }
+  span, img {
+    min-width: 30px;
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.gif-preview {
+  background-color: black;
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 320px;
+  height: 180px;
+  &:before {
+    content: "";
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.tutorial {
+  text-align: left;
+  color: lighten($dark-grey, 32%);
+  font-size: 12px;
+  vertical-align: middle;
+  display: inline-block;
+
+  p {
+    margin-bottom: 12px;
+  }
+}
+
+.timeline {
+  border-radius: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.09));
+  background-color: $dark-grey;
+  box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.09) inset;
+}
+
+.pointy-cursor {
+  position: absolute;
+  height: 10px;
+  width: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -10px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  &:before {
+    content: "";
+    background-color: $dark-grey;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    right: 0;
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+    -webkit-transform-origin: right top;
+    transform-origin: right top;
+  }
+}
+
+.menu-bottom {
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 10px;
+}
+
+.gif-hover-container {
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.gif, .gif-preview, .preview {
+  video, .youtube-wrapper, iframe {
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+
+.gif, .gif-preview, {
+  video, iframe {
+    pointer-events: none;
+  }
+}
+
+.create-your-strip {
+  opacity: 0.5;
+  display: inline-block;
+  color: #fff;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  .create {
+    img {
+      left: 0;
+      position: absolute;
+      height: 0.8em;
+    }
+    padding-left: 45px;
+    text-align: left;
+    font-size: 36px;
+    line-height: 0.8em;
+  }
+  .your-strip {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 0.8em;
+  }
+}
+
+form, .pitch, .create-your-strip {
+  z-index: 10;
+}
+
+input[type=text], input[type=password] {
+  width: 400px;
+  display: inline-block;
+  border: 2px solid $color-valid;
+  background-color: rgba(0,0,0,0);
+  border-radius: 2px;
+  color: $color-valid;
+  padding-left: 10px;
+  height: 40px;
+  margin-right: 5px;
+  &.half-size {
+    width: 200px;
+  }
+}
+
+input[type=submit] {
+  height: 38px;
+  padding: 0 10px;
+}
+
+.pitch {
+  margin-top: 50px;
+  font-size: 10px;
+  p {
+    opacity: 0.5;
+  }
+  a {
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+    line-height: 16px;
+  }
+}
+
+.error {
+  height: 0;
+  font-size: 12px;
+  color: lighten($color-main, 30%);
+  font-weight: 700;
+  line-height: 40px;
+}
+
+
+#strip-creator {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 48px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+
+  &.active {
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+.strip-placeholder {
+  width: 680px;
+  height: 383px;
+  margin: 0 auto;
+  background-color: black;
+  text-align: center;
+  color: $color-valid;
+  .stripping {
+    position: absolute;
+    bottom: 75px;
+    width: 100%;
+    display: block;
+  }
+
+  .progress-bar {
+    background-color: $color-valid;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    transition: width 40s;
+  }
+
+  &.active .progress-bar {
+    width: 100%
+  }
+}
+
+.strip-share {
+  &>div {
+    margin-top: 14px;
+  }
+  .label {
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 5px;
+  }
+  text-align: left;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-delay: 0.2s;
+  pointer-events: none;
+  font-size: 12px;
+  &.active {
+    pointer-events: all;
+    opacity: 1;
+  }
+  .link {
+    color: white;
+    text-decoration: underline;
+    &:visited, &:active, &:focus {
+      color: white;
+    }
+  }
+  a {
+    margin-right: 10px;
+    padding: 5px;
+    svg, span {
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  a.btn.main {
+    margin-right: 0;
+    float: right;
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+input.embed {
+  vertical-align: middle;
+  display: inline-block;
+  border-width: 1px;
+  height: 24px;
+  font-size: 12px;
+  font-family: courier;
+  border-radius: 2px;
+  padding: 5px;
+  width: 400px;
+}
+
+.social-actions {
+  -webkit-transform: scale(0.6);
+  transform: scale(0.6);
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  display: inline-block;
+  height: 27px;
+  a {
+    display: inline-block;
+  }
+}

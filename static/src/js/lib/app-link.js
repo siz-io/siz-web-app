@@ -6,14 +6,13 @@ var $all = function (selector) {
 };
 var appBtns = $all('.app-download');
 
-if (/android/i.test(navigator.userAgent)) {
+if (/android/i.test(navigator.userAgent))
   appBtns.forEach(function (btn) {
     btn.href = ANDROID_LINK;
     btn.className += ' android';
   });
-} else {
+else
   appBtns.forEach(function (btn) {
     btn.href = IOS_LINK;
     btn.className += ' ios';
   });
-}
