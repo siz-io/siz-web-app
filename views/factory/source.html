@@ -38,7 +38,7 @@
   <script>
     window.onSubmitUrl = function () {
       try {
-        window.location = 'edit?video=' + document.querySelector('#video-url').value.split('v=')[1].replace(/(#|&)$/, '');
+        window.location = 'edit?video=' + document.querySelector('#video-url').value.split('v=')[1].replace(/(#|&).*$/, '');
       } catch (e) {
         document.querySelector('.error').innerHTML = 'Invalid YouTube URL';
       }
