@@ -49,7 +49,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function () {
-    this.previewPlayer = window.player = new Player(this.refs.preview.getDOMNode(), {
+    var player = this.previewPlayer = new Player(this.refs.preview.getDOMNode(), {
       videoId: this.props.video,
       playerVars: {
         'rel': 0,
@@ -63,7 +63,19 @@ module.exports = React.createClass({
         'iv_load_policy': 3
       }
     });
-    this.previewPlayer.setPlaybackQuality('small');
+    player.setPlaybackQuality('small');
+    player.on('onError', function (e) {
+      var msg = {
+        2: 'Invalid YouTube ID : check that the URL you pasted works...',
+        5: 'YouTube player error... That\'s YouTube fault ;)',
+        100: 'We can\'t use this video (it\'s private or has been removed). Try another one...',
+        101: 'Embed has been disabled for this video by its owner, it can\'t work with Siz. Try another one...',
+        150: 'Embed has been disabled for this video by its owner, it can\'t work with Siz. Try another one...'
+      }[e.data];
+      window.alert(msg); // eslint-disable-line no-alert
+      window.alert = function () {}; // prevent multiple alerts
+      window.location = 'source';
+    });
     store.on('change', function () {
       this.setState({
         data: store.state
