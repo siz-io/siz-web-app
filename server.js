@@ -14,7 +14,7 @@ var createHTTPErr = require('http-errors');
 var api = {
   request: require('request').defaults({
     json: true,
-    baseUrl: (app.get('env') === 'production') ? 'https://api.siz.io' : 'http://api.dev.siz.io'
+    baseUrl: process.env.API_ENDPOINT || ((process.env.NODE_ENV === 'production') ? 'https://api.siz.io' : 'http://api.dev.siz.io')
   })
 };
 app.set('api', api);
