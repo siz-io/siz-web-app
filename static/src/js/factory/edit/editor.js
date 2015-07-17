@@ -150,6 +150,7 @@ module.exports = React.createClass({
     this.previewPlayer.pauseVideo();
     var title = this.refs.titleField.getDOMNode().value;
     if (title.length > 100) return window.alert('Title is too long : 100 characters max.'); // eslint-disable-line no-alert
+    if (title.length === 0) return window.alert('Please enter a title'); // eslint-disable-line no-alert
     this.props.onEditionComplete({
       title: title,
       boxes: store.state.get('gifs').filter(function (gif) {
