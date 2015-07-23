@@ -114,7 +114,6 @@ else {
     gulp.watch(['server.js', 'lib/**/*.js'], ['lint-js']);
     gulp.watch('static/src/img/**/*.{png,svg,ico,jpg,gif}', ['copy-img']);
     gulp.watch(['static/src/scss/**/*.scss', 'static/src/img/**/*.scss'], ['build-css']);
-    gulp.watch('static/src/js/**/*.jsx', ['build-client-js']);
-    gulp.watch('static/src/js/**/*.js', ['lint-js', 'build-client-js']);
+    gulp.watch('static/src/js/**/*.{js,jsx}', ['lint-js', 'build-client-js']);
   });
 }

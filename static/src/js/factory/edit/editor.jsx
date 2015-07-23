@@ -68,7 +68,7 @@ module.exports = function () {
         </div>
         <div className="substrip" ref="substripArea">
           <div className="substrip-content">
-            <a className={'btn create-btn ' + (this.canSubmitStrip(gifs) ? 'valid' : 'disabled')} href="#" onClick={this.onClickCreateStrip}>Create strip</a>
+            <a className={'btn create-btn ' + (this.canSubmitStrip(gifs) ? 'valid' : 'disabled')} href="#" onClick={this.onClickCreateStrip}>Create</a>
             <form autoComplete="off" className="title-form" onSubmit={this.onTitleSubmit}>
               <input placeholder="Strip title" ref="titleField" type="text"/>
               <input className="btn valid" type="submit" value="OK"/>
@@ -85,10 +85,23 @@ module.exports = function () {
           <p>1. Navigate in the video</p>
           <p>2. Click on a number to capture a highlight</p>
           <p>3. Adjust it with the tool below</p>
+          <p><br/></p>
+          <p>
+            Pick
+            <strong>1</strong>
+            highlight, you'll get a
+            <strong>gif</strong>
+          </p>
+          <p>
+            Pick
+            <strong>2,3,4</strong>
+            highlights, you'll get a
+            <strong>strip</strong>
+          </p>
         </div>
         {activeGif &&
-        <Gif endMs={activeGif.get('endMs')} playing={!s.get('seeking') && this.isPreviewPlaying(gifs)} startMs={activeGif.get('startMs')} video={video}/>}
-      </div>
+        <Gif endMs={activeGif.get('endMs')} playing={!s.get('seeking') && this.isPreviewPlaying(gifs)} startMs={activeGif.get('startMs')} video={video}/>
+        }</div>
       <div className="timeline">
         <svg className="pointy-cursor" preserveAspectRatio="none" viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#222" points="10 0 20 10 0 10"/>

@@ -25,10 +25,10 @@
 <body>
 
   <div class="title">
-    <div class="powered-by" style="display:none">
-      <a href="{{shareUrl}}" onclick="window.ga('send', 'event', 'story', 'embed-logo-click', '{{slug}}');" target="_blank">
-        <img src="/static/img/siz-bg.png" alt="Siz">
-      </a>
+    <div class="actions">
+      <a href="#" class="play-btn"></a>
+      <a href="#" class="share-btn"></a>
+      <a href="{{shareUrl}}" class="source-btn" style="display:none" onclick="window.ga('send', 'event', 'story', 'embed-logo-click', '{{slug}}');" target="_blank"></a>
     </div>
     {{title}}
   </div>
@@ -46,19 +46,15 @@
     <div id="gif3" class="gif">
       <div class="img-placeholder"></div>
     </div>
-  </div>
-
-  <div class="actions-container">
-    <div class="actions">
-      <a href="#" class="share-btn"></a>
-      <a href="#" class="play-btn"></a>
-    </div>
+    <div class="play-full"><a href="#">Play<br>full video</a></div>
   </div>
 
   <div id="player-container" class="hidden">
     <div id="player-placeholder"></div>
-    <a class="right-action close-btn" href="#"></a>
-    <a class="right-action share-btn" href="#"></a>
+    <div class="right-actions">
+      <a class="right-action close-btn" href="#"></a>
+      <a class="right-action share-btn" href="#"></a>
+    </div>
   </div>
 
   <div id="sharebox-container">

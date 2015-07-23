@@ -10,6 +10,9 @@
     .video-strip {
       width: $width;
       height: $width * 9 / 16 * 4;
+      &.one-gif {
+        height: $width * 9 / 16;
+      }
     }
   }
 }
@@ -44,4 +47,3 @@
     height: 720px * 9 / 16;
   }
 }
-
