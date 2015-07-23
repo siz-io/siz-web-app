@@ -342,13 +342,18 @@ body {
 
 .tutorial {
   text-align: left;
-  color: lighten($dark-grey, 32%);
+  color: darken(white, 20%);
   font-size: 12px;
   vertical-align: middle;
   display: inline-block;
 
   p {
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+  }
+  strong {
+    color: $color-valid;
+    font-size: 14px;
+    margin: 0 3px;
   }
 }
 
@@ -432,21 +437,16 @@ body {
   color: #fff;
   margin-top: 100px;
   margin-bottom: 50px;
-  .create {
-    img {
-      left: 0;
-      position: absolute;
-      height: 0.8em;
-    }
-    padding-left: 45px;
-    text-align: left;
-    font-size: 36px;
-    line-height: 0.8em;
+  font-size: 36px;
+  line-height: 1.1em;
+  img {
+    height: 0.8em;
+    margin-right: 10px;
   }
-  .your-strip {
+  strong {
+    color: #fff;
     font-weight: 700;
     font-size: 48px;
-    line-height: 0.8em;
   }
 }
 
@@ -475,16 +475,20 @@ input[type=submit] {
 }
 
 .pitch {
-  margin-top: 50px;
-  font-size: 10px;
-  p {
-    opacity: 0.5;
+  margin-top: 40px;
+  font-size: 12px;
+  color: darken(white, 20%);
+  div {
+    margin-bottom: 10px;
+    strong {
+      color: white;
+    }
   }
-  a {
-    margin-top: 10px;
-    font-size: 12px;
-    padding: 5px 10px;
-    line-height: 16px;
+  iframe {
+    display: inline-block;
+    margin: 5px;
+    height: 124px;
+    width: 220px;
   }
 }
 
@@ -540,6 +544,19 @@ input[type=submit] {
 
   &.active .progress-bar {
     width: 100%
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    &.one-gif {
+      width: 65%;
+      height: 65%;
+    }
   }
 }
 

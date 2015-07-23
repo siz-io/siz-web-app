@@ -5,7 +5,7 @@ try {
   isEmbed = true;
 }
 if (isEmbed) {
-  document.querySelector('.powered-by').style.display = 'block';
+  document.querySelector('.source-btn').style.display = 'block';
 
   // Set self analytics
   /* eslint-disable */

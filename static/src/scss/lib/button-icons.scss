@@ -1,23 +1,17 @@
 .play-btn {
   background-image: url("/static/img/play.png");
-  background-size: 60px !important;
-  &:active {
-    background-image: url("/static/img/play_hl.png");
-  }
 }
 
 .share-btn {
   background-image: url("/static/img/share.png");
-  &:active {
-    background-image: url("/static/img/share_hl.png");
-  }
 }
 
 .close-btn {
   background-image: url("/static/img/close.png");
-  &:active {
-    background-image: url("/static/img/close_hl.png");
-  }
+}
+
+.source-btn {
+  background-image: url("/static/img/watermark.png");
 }
 
 .app-download {
@@ -37,5 +31,3 @@
     background-image: url("https://developer.android.com/images/brand/en_app_rgb_wo_45.png");
   }
 }
-
-
