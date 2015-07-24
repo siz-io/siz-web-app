@@ -68,7 +68,7 @@ module.exports = function () {
         </div>
         <div className="substrip" ref="substripArea">
           <div className="substrip-content">
-            <a className={'btn create-btn ' + (this.canSubmitStrip(gifs) ? 'valid' : 'disabled')} href="#" onClick={this.onClickCreateStrip}>Create</a>
+            <a className={'btn create-btn ' + (this.canSubmitStrip(gifs) ? 'valid' : 'disabled')} href="#" onClick={this.onClickCreateStrip}>{this.getCreateBtnTitle(gifs)}</a>
             <form autoComplete="off" className="title-form" onSubmit={this.onTitleSubmit}>
               <input placeholder="Strip title" ref="titleField" type="text"/>
               <input className="btn valid" type="submit" value="OK"/>

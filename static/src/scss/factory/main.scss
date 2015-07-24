@@ -435,8 +435,8 @@ body {
   opacity: 0.5;
   display: inline-block;
   color: #fff;
-  margin-top: 100px;
-  margin-bottom: 50px;
+  margin-top: 40px;
+  margin-bottom: 30px;
   font-size: 36px;
   line-height: 1.1em;
   img {
@@ -455,7 +455,7 @@ form, .pitch, .create-your-strip {
 }
 
 input[type=text], input[type=password] {
-  width: 400px;
+  width: 620px;
   display: inline-block;
   border: 2px solid $color-valid;
   background-color: rgba(0,0,0,0);
@@ -465,7 +465,7 @@ input[type=text], input[type=password] {
   height: 40px;
   margin-right: 5px;
   &.half-size {
-    width: 200px;
+    width: 310px;
   }
 }
 
@@ -475,7 +475,7 @@ input[type=submit] {
 }
 
 .pitch {
-  margin-top: 40px;
+  margin-top: 30px;
   font-size: 12px;
   color: darken(white, 20%);
   div {
@@ -487,8 +487,8 @@ input[type=submit] {
   iframe {
     display: inline-block;
     margin: 5px;
-    height: 124px;
-    width: 220px;
+    height: 185px;
+    width: 330px;
   }
 }
 
@@ -554,15 +554,15 @@ input[type=submit] {
     bottom: 0;
     margin: auto;
     &.one-gif {
-      width: 65%;
-      height: 65%;
+      width: 432px;
+      height: 243px;
     }
   }
 }
 
 .strip-share {
   &>div {
-    margin-top: 14px;
+    margin-bottom: 14px;
   }
   .label {
     display: inline-block;

@@ -48,6 +48,12 @@ module.exports = React.createClass({
     }, false);
   },
 
+  getCreateBtnTitle: function (gifs) {
+    return ['Create', 'Create gif', 'Create strip'][gifs.count(function (gif) {
+      return gif.get('endMs') > 0;
+    })];
+  },
+
   componentDidMount: function () {
     var player = this.previewPlayer = new Player(this.refs.preview.getDOMNode(), {
       videoId: this.props.video,
