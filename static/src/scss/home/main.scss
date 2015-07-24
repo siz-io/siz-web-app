@@ -119,6 +119,9 @@ body {
       color: $color-main;
       font-weight: 700;
     }
+    p {
+      margin-bottom: 10px;
+    }
   }
   &:before {
     content: "";
@@ -126,7 +129,6 @@ body {
     display: inline-block;
     height: 100%;
   }
-  margin-bottom: 20px;
 }
 
 .btn {

@@ -67,6 +67,12 @@ app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
   console.log(err.statusCode ? err : (err.stack || err));
   console.log('');
   if (err.redirectUrl) res.redirect(err.redirectUrl);
+  else if (/^\/ajax\//.test(req.url))
+    res.status(err.statusCode || 500).send({
+      errors: [err.clientMsg || err.apiResBody || {
+        title: err.name || 'InternalServerError'
+      }]
+    });
   else res.status(err.statusCode || 500).render(err.view || 'error', {
     errMsg: err.clientMsg || (err.statusCode < 500 ? 'There\'s nothing here...' : 'Oops... Something went wrong on our side.')
   });

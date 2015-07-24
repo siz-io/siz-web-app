@@ -19,31 +19,37 @@ function findGifUrl(box) {
   return url;
 }
 
-const displayStrip = story => {
-  const slug = story.slug;
-  const link = window.location.protocol + '//' + window.location.host + '/stories/' + slug;
+function fillLink(tag, url) {
+  tag.innerHTML = url;
+  tag.href = url;
+}
+
+const displayStrip = strip => {
+  const slug = strip.slug;
+  const stripUrl = window.location.protocol + '//' + window.location.host + '/stories/' + slug;
   const embedUrl = window.location.protocol + '//' + window.location.host + '/embed/' + slug;
-  templateShareUrls('.share-sprite-facebook', link);
-  templateShareUrls('.share-sprite-twitter', link);
-  templateShareUrls('.share-sprite-mail', link);
+  templateShareUrls('.share-sprite-facebook', stripUrl);
+  templateShareUrls('.share-sprite-twitter', stripUrl);
+  templateShareUrls('.share-sprite-mail', stripUrl);
   $('input.embed').value = $('input.embed').value.replace(/{embedUrl}/, embedUrl);
   editorBg.className = editorBg.className.replace(/collapsed/, '');
   stripPlaceholder.innerHTML = '<iframe src="/embed/' + slug + '" scrolling="no" frameborder="0" allowfullscreen></iframe>';
   stripShare.className += ' active';
-  const linkTag = stripShare.querySelector('.link');
-  linkTag.innerHTML = link;
-  linkTag.href = link;
-  if (story.boxes.length === 1) {
+  fillLink(stripShare.querySelector('#strip-url a'), stripUrl);
+  stripShare.querySelector('#mp4-dl').href = strip.loop.formats[0].href;
+  if (strip.boxes.length === 1) {
     stripPlaceholder.style['background-color'] = 'transparent';
+    stripPlaceholder.style.height = '353px';
     stripPlaceholder.querySelector('iframe').className += ' one-gif';
-    const gifTag = stripShare.querySelector('#gif-dl');
-    gifTag.style.display = 'inline-block';
-    gifTag.href = findGifUrl(story.boxes[0]);
+    const gifTag = stripShare.querySelector('#gif-url');
+    gifTag.style.display = 'block';
+    fillLink(gifTag.querySelector('a'), findGifUrl(strip.boxes[0]));
   }
 };
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const pingStrip = slug => ajax('/stories/' + slug).catch(() => delay(500).then(pingStrip.bind(null, slug)));
+const checkStrip = id => ajax('/ajax/rpc/check-strip/' + id)
+  .then(res => res.stories.length ? res.stories[0] : delay(500).then(checkStrip.bind(null, id)));
 
 export default stripData => {
   stripData.tags = [];
@@ -53,6 +59,6 @@ export default stripData => {
   ajax('/factory/create-strip', {
       stories: [stripData]
     })
-    .then(body => pingStrip(body.stories[0].slug)
-      .then(displayStrip.bind(null, body.stories[0])));
+    .then(body => checkStrip(body.stories[0].id)
+      .then(displayStrip));
 };
