@@ -93,18 +93,18 @@ body {
 .factory-pitch {
   padding: 0 20px;
   margin-top: -80px;
+  margin-bottom: 15px;
   font-size: 12px;
   .illustration, .pitch {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
   }
   .illustration {
-    width: 100px;
+    height: 100px;
   }
   .pitch {
     margin-left: 20px;
     text-align: left;
-    width: 240px;
 
     h1 {
       font-size: 28px;
@@ -129,6 +129,10 @@ body {
     display: inline-block;
     height: 100%;
   }
+}
+
+input[type=text] {
+  background-color: darken(white, 10%);
 }
 
 .btn {
