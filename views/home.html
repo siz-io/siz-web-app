@@ -60,14 +60,25 @@
     <div class="pitch">
       <h2>Want to create</h2>
       <h1>your strip?</h1>
-      <p>
-        Discover the <strong>Siz Factory</strong>, and create a gif or a strip from any YouTube video.
-        Pick your highlights, and the Factory will create your gif/strip.
-      </p>
-      <p>What are you waiting for?</p>
     </div>
   </div>
-  <span style="color:#bbb;margin-right:5px">Take me to </span><a style="margin-right:69px" href="/factory" class="btn main">The Siz Factory</a>
+
+  <script>
+    window.onSubmitUrl = function () {
+      var url = document.querySelector('#video-url').value;
+      if (!url) return window.location = '/factory/source';
+      try {
+        window.location = '/factory/edit?video=' + url.split('v=')[1].replace(/(#|&).*$/, '');
+      } catch (e) {
+        document.querySelector('.error').innerHTML = 'Invalid YouTube URL';
+      }
+    }
+  </script>
+  <form autocomplete="off" method="get" onsubmit="window.onSubmitUrl(); return false;">
+    <input id="video-url" type="text" autofocus placeholder="YouTube URL">
+    <input type="submit" class="btn main" value="Make it loop!">
+    <br><div class="error"></div>
+  </form>
 
   <div class="oblique-bottom-wrapper">
     <svg class="oblique-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 60" preserveAspectRatio="none">

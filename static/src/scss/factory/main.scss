@@ -456,14 +456,8 @@ form, .pitch, .create-your-strip {
 
 input[type=text], input[type=password] {
   width: 620px;
-  display: inline-block;
   border: 2px solid $color-valid;
-  background-color: rgba(0,0,0,0);
-  border-radius: 2px;
   color: $color-valid;
-  padding-left: 10px;
-  height: 40px;
-  margin-right: 5px;
   &.half-size {
     width: 310px;
   }
@@ -490,14 +484,6 @@ input[type=submit] {
     height: 185px;
     width: 330px;
   }
-}
-
-.error {
-  height: 0;
-  font-size: 12px;
-  color: lighten($color-main, 30%);
-  font-weight: 700;
-  line-height: 40px;
 }
 
 

@@ -1,3 +1,10 @@
+$color-neutral: #6C6C6C;
+$color-main: #f80000;
+$color-active: #5A00FE;
+$color-valid: #2DD25F;
+$color-facebook: #3b5998;
+$color-instagram: #125688;
+
 /*
   HTML5 Reset :: style.css
   ----------------------------------------------------------
@@ -173,4 +180,24 @@ iframe {
 
 input[type=submit] {
   border:none;
+}
+
+input[type=text], input[type=password] {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  border-radius: 2px;
+  padding-left: 10px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.error {
+  padding-top: 5px;
+  height: 0;
+  font-size: 12px;
+  color: lighten($color-main, 30%);
+  font-weight: 700;
+  position: relative;
+  z-index: 10;
 }
