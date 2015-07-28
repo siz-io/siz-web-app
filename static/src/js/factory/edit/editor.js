@@ -49,9 +49,9 @@ module.exports = React.createClass({
   },
 
   getCreateBtnTitle: function (gifs) {
-    return ['Create', 'Create gif', 'Create strip'][gifs.count(function (gif) {
+    return ['Create', 'Create gif', 'Create strip'][Math.min(2, gifs.count(function (gif) {
       return gif.get('endMs') > 0;
-    })];
+    }))];
   },
 
   componentDidMount: function () {
