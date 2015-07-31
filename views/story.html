@@ -20,7 +20,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/story/main.css">
-  <link href='http://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
 
   <!-- Google Analytics -->
   <script>
@@ -68,7 +68,7 @@
     </div>
   </div>
 
-  <iframe class="video-strip" scrolling="no" src="/embed/{{slug}}" allowfullscreen></iframe>
+  <iframe class="video-strip {{oneGifClass}}" scrolling="no" src="/embed/{{slug}}" allowfullscreen></iframe>
 
   <div class="menu menu-bottom">
     <a href="/trending">Trending</a>
@@ -76,7 +76,15 @@
     <a href="mailto:hello@siz.io" target="_blank">Contact</a>
     <span>© SIZ 2015</span>
   </div>
-  {{#isIOS}}<iframe src="siz://stories/{{slug}}" style="display:none;width:1px;height:1px" scrolling="no"></iframe>{{/isIOS}}
   <script src="/static/js/story/main.js"></script>
+  {{#isIOS}}
+    <iframe src="siz://stories/{{slug}}" style="display:none;width:1px;height:1px" scrolling="no"></iframe>
+    {{#forceStore}}
+      <script>
+        document.body.style.display = 'none';
+        window.location = '/get-the-app';
+      </script>
+    {{/forceStore}}
+  {{/isIOS}}
 </body>
 </html>

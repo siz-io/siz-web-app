@@ -4,9 +4,7 @@ var player;
 var playerReady = false;
 
 function playVideo() {
-  if ($('#player-container').className === '' && playerReady) {
-    player.playVideo();
-  }
+  if ($('#player-container').className === '' && playerReady) player.playVideo();
 }
 
 function showPlayer(videoId) {
@@ -17,7 +15,8 @@ function showPlayer(videoId) {
     width: '100%',
     videoId: videoId,
     playerVars: {
-      autoplay: 1
+      autoplay: 1,
+      'iv_load_policy': 3
     },
     events: {
       onReady: function () {
@@ -31,6 +30,11 @@ function showPlayer(videoId) {
 
 module.exports = function (story) {
   $('.play-btn').onclick = function (event) {
+    window.ga('send', 'event', 'story', 'play', story.slug);
+    event.preventDefault();
+    showPlayer(story.source.id);
+  };
+  $('.play-full a').onclick = function (event) {
     window.ga('send', 'event', 'story', 'play', story.slug);
     event.preventDefault();
     showPlayer(story.source.id);
