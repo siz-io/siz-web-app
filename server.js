@@ -10,6 +10,7 @@ import createHTTPErr from 'http-errors';
 import {hidePasswords, absPath, clientOs} from './lib/utils';
 import {safeLoad as yamlSafeLoad} from 'js-yaml';
 import {readFileSync} from 'fs';
+import {find, matches} from 'lodash';
 /* beautify ignore:end */
 
 const app = express();
@@ -27,10 +28,11 @@ app.use('/factory', factory);
 app.use(strips);
 
 // App download
-const trackingUrls = yamlSafeLoad(readFileSync(absPath('conf/app-dl-tracking-urls.yaml')));
-app.set('tracking urls', trackingUrls);
-app.get('/get-the-app', (req, res) =>
-  res.redirect((trackingUrls[req.query.src] || trackingUrls.default)[clientOs(req)] || '/'));
+const behaviors = yamlSafeLoad(readFileSync(absPath('conf/app-dl-urls.yaml')));
+app.get('/get-the-app', (req, res) => {
+  const urls = find(behaviors, b => matches(b.query)(req.query)).urls || {};
+  res.redirect(urls[clientOs(req)] || urls.default || '/');
+});
 
 // Unknown url
 app.use(() => {

@@ -1,0 +1,16 @@
+# Redirections for /get-the-app?<query>
+# The following cases are tested in order
+# First matching one is used
+
+- query:
+    origin: xxx
+    src: xxx
+  urls:
+    ios: http://xxxxxx
+    android: http://xxxxxx
+    default: http://xxxxxx # if ommitted, defaults to / (home page)
+
+- query: {} # catch all
+  urls:
+    ios: http://xxxxxx
+    android: http://xxxxxx
