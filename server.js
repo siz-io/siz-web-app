@@ -1,14 +1,13 @@
 import express from 'express';
 import cons from 'consolidate';
 import favicon from 'serve-favicon';
-import useragent from 'useragent';
 import factory from './lib/factory';
 import strips from './lib/strips';
 import basicAuth from './lib/basic-auth';
 import cookieParser from 'cookie-parser';
 import createHTTPErr from 'http-errors';
 /* beautify ignore:start */
-import {hidePasswords, absPath} from './lib/utils';
+import {hidePasswords, absPath, clientOs} from './lib/utils';
 import {safeLoad as yamlSafeLoad} from 'js-yaml';
 import {readFileSync} from 'fs';
 /* beautify ignore:end */
@@ -29,10 +28,9 @@ app.use(strips);
 
 // App download
 const trackingUrls = yamlSafeLoad(readFileSync(absPath('conf/app-dl-tracking-urls.yaml')));
-app.get('/get-the-app', (req, res) => {
-  const os = useragent.lookup(req.headers['user-agent']).os.family.toLowerCase();
-  res.redirect((trackingUrls[req.query.src] || trackingUrls.default)[os] || '/');
-});
+app.set('tracking urls', trackingUrls);
+app.get('/get-the-app', (req, res) =>
+  res.redirect((trackingUrls[req.query.src] || trackingUrls.default)[clientOs(req)] || '/'));
 
 // Unknown url
 app.use(() => {
