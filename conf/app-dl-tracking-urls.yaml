@@ -3,6 +3,7 @@
 default: # when src is empty, absent or unrecognized (not found below)
   ios: defaultIOS
   android: defaultANDROID
+  forceStore: NO
 
 tum:
   ios: tumIOS
