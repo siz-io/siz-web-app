@@ -31,7 +31,7 @@ app.use(strips);
 const behaviors = yamlSafeLoad(readFileSync(absPath('conf/app-dl-urls.yaml')));
 app.get('/get-the-app', (req, res) => {
   const urls = find(behaviors, b => matches(b.query)(req.query)).urls || {};
-  res.redirect(urls[clientOs(req)] || urls.default || '/');
+  res.redirect(urls[req.query.os || clientOs(req)] || urls.default || '/');
 });
 
 // Unknown url

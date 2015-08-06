@@ -9,7 +9,9 @@
 #   urls:
 #     ios: http://redirection-url-for-iOS-devices
 #     android: http://redirection-url-for-Android-devices
-#     default: http://redirection-url-for-other-devices # if ommitted, defaults to / (home page)
+#     default: http://redirection-url-for-other-devices - if ommitted, defaults to / (home page)
+#     NB: OS is detected by parsing User-Agent
+#         This can be overridden by using os=ios|android in query
 
 - query:
     origin: overlay
