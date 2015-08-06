@@ -5,7 +5,7 @@ var appBtns = $all('.app-download');
 
 if (/android/i.test(navigator.userAgent))
   appBtns.forEach(function (btn) {
-    btn.href = "/get-the-app?origin=story&amp;os=android";
+    btn.href = '/get-the-app?origin=story&amp;os=android';
     btn.className += ' android';
   });
 else
