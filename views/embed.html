@@ -23,53 +23,54 @@
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <a href="#" class="next"><div>Next</div></a>
+  <div class="strip">
+    <div class="title">
+      <div class="actions">
+        <a href="#" class="play-btn"></a>
+        <a href="#" class="share-btn"></a>
+        <a href="{{shareUrl}}" class="source-btn" style="display:none" onclick="window.ga('send', 'event', 'story', 'embed-logo-click', '{{slug}}');" target="_blank"></a>
+      </div>
+      {{title}}
+    </div>
 
-  <div class="title">
-    <div class="actions">
-      <a href="#" class="play-btn"></a>
-      <a href="#" class="share-btn"></a>
-      <a href="{{shareUrl}}" class="source-btn" style="display:none" onclick="window.ga('send', 'event', 'story', 'embed-logo-click', '{{slug}}');" target="_blank"></a>
+    <div id="grid">
+      <div id="gif0" class="gif">
+        <div class="img-placeholder"></div>
+      </div>
+      <div id="gif1" class="gif">
+        <div class="img-placeholder"></div>
+      </div>
+      <div id="gif2" class="gif">
+        <div class="img-placeholder"></div>
+      </div>
+      <div id="gif3" class="gif">
+        <div class="img-placeholder"></div>
+      </div>
+      <div class="play-full"><a href="#">Play<br>full video</a></div>
     </div>
-    {{title}}
-  </div>
 
-  <div id="grid">
-    <div id="gif0" class="gif">
-      <div class="img-placeholder"></div>
+    <div id="player-container" class="hidden">
+      <div id="player-placeholder"></div>
+      <div class="right-actions">
+        <a class="right-action close-btn" href="#"></a>
+        <a class="right-action share-btn" href="#"></a>
+      </div>
     </div>
-    <div id="gif1" class="gif">
-      <div class="img-placeholder"></div>
-    </div>
-    <div id="gif2" class="gif">
-      <div class="img-placeholder"></div>
-    </div>
-    <div id="gif3" class="gif">
-      <div class="img-placeholder"></div>
-    </div>
-    <div class="play-full"><a href="#">Play<br>full video</a></div>
-  </div>
 
-  <div id="player-container" class="hidden">
-    <div id="player-placeholder"></div>
-    <div class="right-actions">
-      <a class="right-action close-btn" href="#"></a>
-      <a class="right-action share-btn" href="#"></a>
-    </div>
-  </div>
-
-  <div id="sharebox-container">
-    <div id="sharebox">
-      <h2>Share this story</h2>
-      <a class="share-sprite-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}" target="_blank"></a>
-      <a class="share-sprite-twitter" href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&amp;original_referer={{encodedShareUrl}}" target="_blank"></a>
-      <a class="share-sprite-mail" href="mailto:?body={{encodedShareUrl}}" target="_blank"></a>
-      <div class="embed-code">
-        <span>&lt;/&gt;</span>
-        <input type="text" onclick="this.focus();this.select()" readonly="readonly" value='<iframe width="480" height="270" src="{{embedUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>'>
+    <div id="sharebox-container">
+      <div id="sharebox">
+        <h2>Share this story</h2>
+        <a class="share-sprite-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{encodedShareUrl}}" target="_blank"></a>
+        <a class="share-sprite-twitter" href="https://twitter.com/intent/tweet?url={{encodedShareUrl}}&amp;original_referer={{encodedShareUrl}}" target="_blank"></a>
+        <a class="share-sprite-mail" href="mailto:?body={{encodedShareUrl}}" target="_blank"></a>
+        <div class="embed-code">
+          <span>&lt;/&gt;</span>
+          <input type="text" onclick="this.focus();this.select()" readonly="readonly" value='<iframe width="480" height="270" src="{{embedUrl}}" scrolling="no" frameborder="0" allowfullscreen></iframe>'>
+        </div>
       </div>
     </div>
   </div>
-
 
   <!-- Story data preloaded by web server -->
   <script>
