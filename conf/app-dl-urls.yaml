@@ -45,14 +45,14 @@
     ios: http://ad.apps.fm/CL9wdn36rL36IlNMC7hjjvE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyplLn3FQ9Yn0PUtVvuWYZSMn-2sILGiWD4EUofgGxvuTfwmGoCp43dyUyi8sCzsPeK
     android: https://itunes.apple.com/app/id914562000
     desktop: https://itunes.apple.com/app/id914562000
-    
+
 - query:
     origin: story-android
   urls:
     ios: https://play.google.com/store/apps/details?id=io.siz.siz&hl=en
     android: http://ad.apps.fm/42fT7viP0Lk8p4KVXjg0kl5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xR5n7X2qP2-z96nm_r39_2U
     desktop: https://play.google.com/store/apps/details?id=io.siz.siz&hl=en
-    
+
 - query:
     origin: force-store
   urls:
