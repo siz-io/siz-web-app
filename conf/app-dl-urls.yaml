@@ -10,13 +10,13 @@
 #     ios: http://redirection-url-for-iOS-devices
 #     android: http://redirection-url-for-Android-devices
 #     default: http://redirection-url-for-other-devices # if ommitted, defaults to / (home page)
-    
+
 - query:
     origin: overlay
   urls:
     ios: http://ad.apps.fm/mEK4iaC5fDyHIkmFZ3ie2PE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGyp1l2Ppd_cR4XQyI97NCLIZeLmZdPOcw8KmZqWpyf4zjc
     android: http://ad.apps.fm/oDwkHjcrWLrNoLmnN1Lwel5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xWvE6TgaBCrtTMbUCm43ptTQQFtvGmGm78YegHkNWCxf
-    
+
 - query:
     origin: pop-up
   urls:
@@ -28,7 +28,7 @@
   urls:
     ios: http://ad.apps.fm/-9Jjy4vqyRkZhctV2x6zXfE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypHRmKHsREbVOFLMRngjJC1w
     android: http://ad.apps.fm/42fT7viP0Lk8p4KVXjg0kl5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xR5n7X2qP2-z96nm_r39_2U
-    
+
 - query:
     origin: story
   urls:
@@ -39,8 +39,8 @@
     src: tum
   urls:
     ios: http://ad.apps.fm/1a2PzESbBKzu4ArBUY6ht_E7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypki_r4VUnm42ByE0l2JbvlgxpUfoL2xS8045ZJJulpJM
-    android: http://ad.apps.fm/UN3x-R5Xx_WMWPm8ZqUX2V5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xXVGMcP7Pq33NRFqamh6u5v7oXe26TSLZ8kQ2byRoKUG    
-    
+    android: http://ad.apps.fm/UN3x-R5Xx_WMWPm8ZqUX2V5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xXVGMcP7Pq33NRFqamh6u5v7oXe26TSLZ8kQ2byRoKUG
+
 - query: {} # catch all
   urls:
     ios: http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8
