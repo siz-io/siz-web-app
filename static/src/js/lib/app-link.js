@@ -5,11 +5,11 @@ var appBtns = $all('.app-download');
 
 if (/android/i.test(navigator.userAgent))
   appBtns.forEach(function (btn) {
-    btn.href = '/get-the-app?origin=story&amp;os=android';
+    btn.href = '/get-the-app?origin=story&os=android';
     btn.className += ' android';
   });
 else
   appBtns.forEach(function (btn) {
-    btn.href = '/get-the-app?origin=story&amp;os=ios';
+    btn.href = '/get-the-app?origin=story&os=ios';
     btn.className += ' ios';
   });
