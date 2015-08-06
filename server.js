@@ -1,24 +1,25 @@
 import express from 'express';
 import cons from 'consolidate';
 import favicon from 'serve-favicon';
-import useragent from 'useragent';
 import factory from './lib/factory';
 import strips from './lib/strips';
 import basicAuth from './lib/basic-auth';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 import createHTTPErr from 'http-errors';
 /* beautify ignore:start */
-import {hidePasswords} from './lib/utils';
+import {hidePasswords, absPath, clientOs} from './lib/utils';
+import {safeLoad as yamlSafeLoad} from 'js-yaml';
+import {readFileSync} from 'fs';
+import {find, matches} from 'lodash';
 /* beautify ignore:end */
 
 const app = express();
 
 app.engine('html', cons.hogan);
 app.set('view engine', 'html');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', absPath('views'));
 app.set('trust proxy', true);
-app.use(favicon(path.join(__dirname, '/static/dist/dev/img/favicon.ico')));
+app.use(favicon(absPath('static/dist/dev/img/favicon.ico')));
 if (process.env.BASIC_AUTH) basicAuth(app); // Basic Auth for dev endpoints
 app.use('/static', express.static((app.get('env') === 'production') ? 'static/dist/prod' : 'static/dist/dev'));
 app.use(cookieParser(process.env.COOKIE_SIGNING_SECRET || 'F4ts0 The Keyb04rd C4t'));
@@ -27,33 +28,10 @@ app.use('/factory', factory);
 app.use(strips);
 
 // App download
+const behaviors = yamlSafeLoad(readFileSync(absPath('conf/app-dl-urls.yaml')));
 app.get('/get-the-app', (req, res) => {
-  const fromFb = (req.query.src === 'fb');
-  switch (useragent.lookup(req.headers['user-agent']).os.family) {
-    case 'Android':
-      {
-        res.redirect(
-          fromFb ?
-          'http://ad.apps.fm/tIHnlV9MJ7n7I396kv1kELL7POj-y_ZJZxxUgeNYK8M2lLagVwZ2vz-PCHjw5bq80bjulM_0aO9WzZjf61UPXQ' :
-          'http://ad.apps.fm/kOplmSauaDOzVBBGCmJAWV5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xUKQ2RDzjrQkls24bi1qDmnwmGoCp43dyUyi8sCzsPeK'
-        );
-        break;
-      }
-    case 'iOS':
-      {
-        res.redirect(
-          fromFb ?
-          'http://ad.apps.fm/DSGVJuBGHDUZG3VntFfnzPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypLnfa-r5MdHdW9jqZpKNWhBRoTqVPU3WAv9GqJZFwDgc' :
-          'http://ad.apps.fm/90hjr4sAdA5hF70eoAC8zPE7og6fuV2oOMeOQdRqrE3ycgNsA4xKbwTdloUGRGypeQi4SQQMU9uRGhHF3n2TcxO790ZAUYOgdBYbSNhr0p8'
-        );
-        break;
-      }
-    default:
-      {
-        res.redirect('/');
-        break;
-      }
-  }
+  const urls = find(behaviors, b => matches(b.query)(req.query)).urls || {};
+  res.redirect(urls[req.query.os || clientOs(req)] || urls.default || '/');
 });
 
 // Unknown url

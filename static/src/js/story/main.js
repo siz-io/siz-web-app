@@ -11,4 +11,4 @@ if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i
 // Android alert
 var ANDROID_CTA = 'We have an awesome app designed for mobile. It looks a trillion times better!!! Do you want to download it?';
 if (navigator.userAgent.match(/Android/i) && window.confirm(ANDROID_CTA)) // eslint-disable-line no-alert
-  window.location.href = 'http://ad.apps.fm/oDwkHjcrWLrNoLmnN1Lwel5KLoEjTszcQMJsV6-2VnHFDLXitVHB6BlL95nuoNYfQdCcRgQKk3L5883T-Th4xWvE6TgaBCrtTMbUCm43ptTQQFtvGmGm78YegHkNWCxf';
+  window.location.href = '/get-the-app?origin=pop-up';
