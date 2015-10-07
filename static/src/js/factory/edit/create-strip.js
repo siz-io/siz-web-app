@@ -26,6 +26,7 @@ function fillLink(tag, url) {
 
 const displayStrip = strip => {
   const slug = strip.slug;
+  window.ga('send', 'event', 'story', 'create', slug);
   const stripUrl = window.location.protocol + '//' + window.location.host + '/stories/' + slug;
   const embedUrl = window.location.protocol + '//' + window.location.host + '/embed/' + slug;
   templateShareUrls('.share-sprite-facebook', stripUrl);

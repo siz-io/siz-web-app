@@ -1,4 +1,4 @@
-FROM quay.io/sizio/node-front:node-front_v1.0.1
+FROM quay.io/sizio/node-front:node-front_v1.0.2
 
 MAINTAINER The Siz Team
 
@@ -19,4 +19,4 @@ RUN npm install
 RUN npm run gulp --production
 
 EXPOSE 1515
-CMD npm start
+CMD npm start 2>&1 | logentries-piper
